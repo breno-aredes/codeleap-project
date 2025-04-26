@@ -9,7 +9,9 @@ export const ButtonContent = styled.div`
 export const InputContent = styled.div`
   display: flex;
   flex-direction: column;
-  input {
+
+  input,
+  textarea {
     width: 100%;
     height: 32px;
     border-radius: 8px;
@@ -28,6 +30,13 @@ export const InputContent = styled.div`
     &:focus {
       outline: none;
     }
+  }
+
+  textarea {
+    height: 74px;
+    resize: none;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
   }
 
   label {
