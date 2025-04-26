@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "..";
 import { ModalContent } from "./styles";
-import Button from "../../Button";
+import Button from "../../button";
 import { ButtonContent } from "../../../styles/globalStyles";
 
 const LoginModal = () => {
