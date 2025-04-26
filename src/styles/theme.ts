@@ -3,9 +3,9 @@ const Theme = {
     background: "#dddddd",
     primary: "#7695EC",
     secondary: "#ffffff",
+    tertiary: "#CCCCCC",
     text: "#000000",
-    border: "#777777",
-    placeholder: "#CCCCCC",
+    inputBorder: "#777777",
     red: {
       primaryRed: "#FF5151",
     },
