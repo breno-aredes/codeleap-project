@@ -19,8 +19,8 @@ export const ModalBackground = styled.main<{ isWide: boolean }>`
 export const ModalContainer = styled.div<{ isWide: boolean }>`
   background-color: ${({ theme }) => theme.colors.secondary};
   width: ${({ isWide }) => (isWide ? "660px" : "500px")};
-  min-height: 100px;
-  border-radius: 24px;
+  padding: 24px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.tertiary};
