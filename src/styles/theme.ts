@@ -6,7 +6,7 @@ const Theme = {
     tertiary: "#CCCCCC",
     text: "#000000",
     inputBorder: "#777777",
-    buttonBorder: "#999999",
+    border: "#999999",
     red: {
       primaryRed: "#FF5151",
     },

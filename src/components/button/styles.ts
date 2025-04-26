@@ -7,7 +7,7 @@ import { StyledButtonProps } from "./types";
 const possibleColors = {
   white: {
     "background-color": "transparent",
-    border: `1px solid ${Theme.colors.buttonBorder}`,
+    border: `1px solid ${Theme.colors.border}`,
     color: Theme.colors.text,
   },
   blue: {

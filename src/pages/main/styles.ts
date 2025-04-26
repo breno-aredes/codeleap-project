@@ -14,4 +14,9 @@ export const Main = styled.main`
   max-width: 800px;
   height: 100%;
   background-color: ${({ theme }) => theme.colors.secondary};
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
 `;
