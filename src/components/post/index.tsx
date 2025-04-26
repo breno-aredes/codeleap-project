@@ -4,16 +4,22 @@ import EditIcon from "../../assets/edit.svg";
 import TrashIcon from "../../assets/trash.svg";
 import EditPost from "../modal/editPost";
 import { useState } from "react";
+import DeletePost from "../modal/deletePost";
 
 const Post: React.FC<PostProps> = ({ title, name, hour, text }) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
+  const [deleteIsVisible, setDeleteIsVisible] = useState(false);
 
   return (
     <S.PostContainer>
       <S.PostHeader>
         <h1>{title}</h1>
         <S.IconsContainer>
-          <img src={TrashIcon} alt="Trash" />
+          <img
+            src={TrashIcon}
+            alt="Trash"
+            onClick={() => setDeleteIsVisible(true)}
+          />
           <img
             src={EditIcon}
             alt="Edit"
@@ -30,6 +36,10 @@ const Post: React.FC<PostProps> = ({ title, name, hour, text }) => {
       </S.PostData>
 
       <EditPost isVisible={editIsVisible} setIsVisible={setEditIsVisible} />
+      <DeletePost
+        isVisible={deleteIsVisible}
+        setIsVisible={setDeleteIsVisible}
+      ></DeletePost>
     </S.PostContainer>
   );
 };

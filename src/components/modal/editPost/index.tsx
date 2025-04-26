@@ -8,12 +8,7 @@ const EditPost: React.FC<EditPostProps> = ({ isVisible, setIsVisible }) => {
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible} isWide>
       <ModalContent>
-        <PostForm
-          isModal
-          isEdit
-          title="Edit item"
-          setIsVisible={setIsVisible}
-        />
+        <PostForm isModal isEdit setIsVisible={setIsVisible} />
       </ModalContent>
     </Modal>
   );

@@ -6,12 +6,11 @@ import { PostFormProps } from "./types";
 const PostForm: React.FC<PostFormProps> = ({
   isModal = false,
   isEdit = false,
-  title,
   setIsVisible,
 }) => {
   return (
     <S.PostFormContent isModal={isModal}>
-      <h1>{title ? title : "What’s on your mind?"}</h1>
+      <h1>{isEdit ? "Edit item" : "What’s on your mind?"}</h1>
       <InputContent>
         <label>Title</label>
         <input placeholder="Hello world"></input>
