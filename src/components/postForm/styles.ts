@@ -10,6 +10,11 @@ export const PostFormContent = styled.div<{ isModal: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
   h1 {
     font-weight: 700;
     font-size: 22px;

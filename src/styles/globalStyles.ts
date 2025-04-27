@@ -4,6 +4,7 @@ export const ButtonContent = styled.div`
   display: flex;
   justify-content: end;
   width: 100%;
+  gap: 16px;
 `;
 
 export const InputContent = styled.div`
@@ -18,7 +19,6 @@ export const InputContent = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.inputBorder};
     box-sizing: border-box;
     padding: 8px 11px;
-    margin-bottom: 16px;
 
     &::placeholder {
       color: ${({ theme }) => theme.colors.tertiary};
@@ -43,5 +43,12 @@ export const InputContent = styled.div`
     font-weight: 400;
     font-size: 16px;
     margin-bottom: 8px;
+  }
+
+  span {
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 6px;
   }
 `;

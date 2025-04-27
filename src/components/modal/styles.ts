@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const ModalBackground = styled.main<{ isWide: boolean }>`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme, isWide }) =>
+    isWide ? theme.colors.backgroundWithOpacity : theme.colors.background};
+
   position: fixed;
   top: 0;
   left: 0;
@@ -10,9 +12,8 @@ export const ModalBackground = styled.main<{ isWide: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2;
   cursor: default;
-  opacity: ${({ isWide }) => (isWide ? "0.8" : "1")};
   pointer-events: auto;
 `;
 

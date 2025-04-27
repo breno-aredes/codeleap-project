@@ -1,6 +1,7 @@
 const Theme = {
   colors: {
     background: "#dddddd",
+    backgroundWithOpacity: "rgba(221, 221, 221, 0.8)",
     primary: "#7695EC",
     secondary: "#ffffff",
     tertiary: "#CCCCCC",

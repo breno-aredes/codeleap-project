@@ -1,22 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoginModal from "../../components/modal/loginModal";
 import * as S from "./styles";
 import Header from "../../components/header";
 import PostForm from "../../components/postForm";
 import Post from "../../components/post";
+import { PostService } from "../../services/post";
+import formatTime from "../../utils/formatTime";
+import { useLoading } from "../../hooks/useLoading";
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { PostSchema } from "../../schemas/posts.schemas";
+import { PostData } from "./types";
+import { useUser } from "../../hooks/useUser";
+import { toast } from "react-toastify";
 
 const MainScreen: React.FC = () => {
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const { setLoading } = useLoading();
+  const { username } = useUser();
+
+  const formMethods = useForm({
+    resolver: yupResolver(PostSchema),
+  });
+
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const data = await PostService.getPosts();
+      setPosts(data.results || []);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error("Erro ao buscar posts:", error);
+    }
+  };
+
+  const handleCreatePost = async (data: { title: string; content: string }) => {
+    try {
+      setLoading(true);
+      await PostService.createPost({
+        username: username,
+        title: data.title,
+        content: data.content,
+        created_datetime: new Date().toISOString(),
+      });
+      await fetchPosts();
+      toast.success("Post created successfully!");
+      formMethods.reset();
+    } catch (error) {
+      setLoading(false);
+      toast.error("Error creating the post. Please try again.");
+      console.error("Erro ao criar post:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
     <S.Body>
       <Header />
       <S.Main>
-        <PostForm />
-        <Post
-          title="My First Post at CodeLeap Network!"
-          name="@tedy"
-          hour="25 minutes ago"
-          text="Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. Duis vel nibh at velit scelerisque suscipit. Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat."
-        />
+        <PostForm useForm={formMethods} onConfirm={handleCreatePost} />
+
+        {posts.length === 0 && (
+          <S.NoItens>Your feed is empty, make a post to get started.</S.NoItens>
+        )}
+
+        {posts.map((post) => (
+          <Post
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            name={post.username}
+            time={formatTime(post.created_datetime)}
+            text={post.content}
+            fetchPosts={fetchPosts}
+          />
+        ))}
       </S.Main>
       <LoginModal />
     </S.Body>
