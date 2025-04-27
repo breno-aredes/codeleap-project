@@ -20,6 +20,7 @@ const Loading = () => {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
+        zIndex: "3",
       }}
       wrapperClass="spinner"
       visible={loading}

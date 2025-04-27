@@ -12,7 +12,7 @@ export const ModalBackground = styled.main<{ isWide: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2;
   cursor: default;
   pointer-events: auto;
 `;
