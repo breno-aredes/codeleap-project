@@ -3,7 +3,7 @@ import Modal from "..";
 import { ModalContent } from "./styles";
 import Button from "../../button";
 import { ButtonContent, InputContent } from "../../../styles/globalStyles";
-import { useUser } from "../../../hooks/useUser"; // caminho de exemplo
+import { useUser } from "../../../hooks/useUser";
 
 const LoginModal = () => {
   const { setUsername, username } = useUser();

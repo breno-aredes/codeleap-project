@@ -5,6 +5,7 @@ import Header from "../../components/header";
 import PostForm from "../../components/postForm";
 import Post from "../../components/post";
 import { PostService } from "../../services/post";
+import formatTime from "../../utils/formatTime";
 
 interface PostData {
   id: number;
@@ -41,7 +42,7 @@ const MainScreen: React.FC = () => {
             key={post.id}
             title={post.title}
             name={post.username}
-            hour={post.created_datetime}
+            hour={formatTime(post.created_datetime)}
             text={post.content}
           />
         ))}
