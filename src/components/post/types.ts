@@ -3,4 +3,6 @@ export interface PostProps {
   time: string;
   title: string;
   text: string;
+  id: number;
+  fetchPosts: () => Promise<void>;
 }

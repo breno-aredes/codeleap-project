@@ -24,8 +24,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const setUsername = (name: string) => {
-    setUsernameState(name);
-    localStorage.setItem("username", name);
+    const lowercaseName = name.toLowerCase();
+    setUsernameState(lowercaseName);
+    localStorage.setItem("username", lowercaseName);
   };
 
   return (

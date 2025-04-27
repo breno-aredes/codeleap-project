@@ -6,11 +6,32 @@ import EditPost from "../modal/editPost";
 import { useState } from "react";
 import DeletePost from "../modal/deletePost";
 import { useUser } from "../../hooks/useUser";
+import { PostService } from "../../services/post";
+import { toast } from "react-toastify";
 
-const Post: React.FC<PostProps> = ({ title, name, time, text }) => {
+const Post: React.FC<PostProps> = ({
+  title,
+  name,
+  time,
+  text,
+  id,
+  fetchPosts,
+}) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
   const { username } = useUser();
+
+  const handleDelete = async () => {
+    try {
+      await PostService.deletePost(id);
+      toast.success("Post deletado com sucesso!");
+      fetchPosts();
+      setDeleteIsVisible(false);
+    } catch (error) {
+      console.error("Erro ao deletar o post:", error);
+      toast.error("Erro ao deletar o post. Tente novamente.");
+    }
+  };
 
   return (
     <S.PostContainer>
@@ -43,6 +64,7 @@ const Post: React.FC<PostProps> = ({ title, name, time, text }) => {
       <DeletePost
         isVisible={deleteIsVisible}
         setIsVisible={setDeleteIsVisible}
+        onConfirm={handleDelete}
       />
     </S.PostContainer>
   );

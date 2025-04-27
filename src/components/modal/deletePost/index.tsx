@@ -5,7 +5,11 @@ import { ModalContent } from "./styles";
 
 import { deletePostProps } from "./types";
 
-const DeletePost: React.FC<deletePostProps> = ({ isVisible, setIsVisible }) => {
+const DeletePost: React.FC<deletePostProps> = ({
+  isVisible,
+  setIsVisible,
+  onConfirm,
+}) => {
   return (
     <Modal isVisible={isVisible} setIsVisible={setIsVisible} isWide>
       <ModalContent>
@@ -15,7 +19,9 @@ const DeletePost: React.FC<deletePostProps> = ({ isVisible, setIsVisible }) => {
             <Button color="white" onClick={() => setIsVisible(false)}>
               Cancel
             </Button>
-            <Button color="red">Delete</Button>
+            <Button color="red" onClick={onConfirm}>
+              Delete
+            </Button>
           </ButtonContent>
         </ButtonContent>
       </ModalContent>

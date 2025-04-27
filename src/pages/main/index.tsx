@@ -18,17 +18,17 @@ interface PostData {
 const MainScreen: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
 
+  const fetchPosts = async () => {
+    try {
+      const data = await PostService.getPosts();
+
+      setPosts(data.results || []);
+    } catch (error) {
+      console.error("Erro ao buscar posts:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const data = await PostService.getPosts();
-
-        setPosts(data.results || []);
-      } catch (error) {
-        console.error("Erro ao buscar posts:", error);
-      }
-    };
-
     fetchPosts();
   }, []);
 
@@ -40,10 +40,12 @@ const MainScreen: React.FC = () => {
         {posts.map((post) => (
           <Post
             key={post.id}
+            id={post.id}
             title={post.title}
             name={post.username}
             time={formatTime(post.created_datetime)}
             text={post.content}
+            fetchPosts={fetchPosts}
           />
         ))}
       </S.Main>
