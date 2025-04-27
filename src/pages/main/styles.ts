@@ -12,7 +12,7 @@ export const Body = styled.div`
 export const Main = styled.main`
   width: 100%;
   max-width: 800px;
-  height: 100%;
+
   background-color: ${({ theme }) => theme.colors.secondary};
   padding: 24px;
   display: flex;

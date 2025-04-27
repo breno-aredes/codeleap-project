@@ -42,7 +42,7 @@ const MainScreen: React.FC = () => {
             key={post.id}
             title={post.title}
             name={post.username}
-            hour={formatTime(post.created_datetime)}
+            time={formatTime(post.created_datetime)}
             text={post.content}
           />
         ))}

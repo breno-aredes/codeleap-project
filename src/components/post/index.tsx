@@ -5,31 +5,35 @@ import TrashIcon from "../../assets/trash.svg";
 import EditPost from "../modal/editPost";
 import { useState } from "react";
 import DeletePost from "../modal/deletePost";
+import { useUser } from "../../hooks/useUser";
 
 const Post: React.FC<PostProps> = ({ title, name, time, text }) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
+  const { username } = useUser();
 
   return (
     <S.PostContainer>
       <S.PostHeader>
         <h1>{title}</h1>
-        <S.IconsContainer>
-          <img
-            src={TrashIcon}
-            alt="Trash"
-            onClick={() => setDeleteIsVisible(true)}
-          />
-          <img
-            src={EditIcon}
-            alt="Edit"
-            onClick={() => setEditIsVisible(true)}
-          />
-        </S.IconsContainer>
+        {username === name && (
+          <S.IconsContainer>
+            <img
+              src={TrashIcon}
+              alt="Trash"
+              onClick={() => setDeleteIsVisible(true)}
+            />
+            <img
+              src={EditIcon}
+              alt="Edit"
+              onClick={() => setEditIsVisible(true)}
+            />
+          </S.IconsContainer>
+        )}
       </S.PostHeader>
       <S.PostData>
         <S.PostMain>
-          <h2>{name}</h2>
+          <h2>@{name}</h2>
           <p>{time}</p>
         </S.PostMain>
         <h3>{text}</h3>
@@ -39,7 +43,7 @@ const Post: React.FC<PostProps> = ({ title, name, time, text }) => {
       <DeletePost
         isVisible={deleteIsVisible}
         setIsVisible={setDeleteIsVisible}
-      ></DeletePost>
+      />
     </S.PostContainer>
   );
 };
