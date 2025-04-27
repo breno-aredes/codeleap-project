@@ -6,7 +6,7 @@ import EditPost from "../modal/editPost";
 import { useState } from "react";
 import DeletePost from "../modal/deletePost";
 
-const Post: React.FC<PostProps> = ({ title, name, hour, text }) => {
+const Post: React.FC<PostProps> = ({ title, name, time, text }) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
 
@@ -30,7 +30,7 @@ const Post: React.FC<PostProps> = ({ title, name, hour, text }) => {
       <S.PostData>
         <S.PostMain>
           <h2>{name}</h2>
-          <p>{hour}</p>
+          <p>{time}</p>
         </S.PostMain>
         <h3>{text}</h3>
       </S.PostData>
