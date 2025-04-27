@@ -1,22 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LoginModal from "../../components/modal/loginModal";
 import * as S from "./styles";
 import Header from "../../components/header";
 import PostForm from "../../components/postForm";
 import Post from "../../components/post";
+import { PostService } from "../../services/post";
+
+interface PostData {
+  id: number;
+  title: string;
+  username: string;
+  created_datetime: string;
+  content: string;
+}
 
 const MainScreen: React.FC = () => {
+  const [posts, setPosts] = useState<PostData[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const data = await PostService.getPosts();
+
+        setPosts(data.results || []);
+      } catch (error) {
+        console.error("Erro ao buscar posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <S.Body>
       <Header />
       <S.Main>
         <PostForm />
-        <Post
-          title="My First Post at CodeLeap Network!"
-          name="@tedy"
-          hour="25 minutes ago"
-          text="Curabitur suscipit suscipit tellus. Phasellus consectetuer vestibulum elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas egestas arcu quis ligula mattis placerat. Duis vel nibh at velit scelerisque suscipit. Duis lobortis massa imperdiet quam. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Fusce a quam. Nullam vel sem. Nullam cursus lacinia erat."
-        />
+        {posts.map((post) => (
+          <Post
+            key={post.id}
+            title={post.title}
+            name={post.username}
+            hour={post.created_datetime}
+            text={post.content}
+          />
+        ))}
       </S.Main>
       <LoginModal />
     </S.Body>

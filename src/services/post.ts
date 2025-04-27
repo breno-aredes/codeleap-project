@@ -1,32 +1,11 @@
 import { CreatePost, UpdatePost } from "../types/posts";
-import { api } from "./api";
+
+const BASE_URL = "https://dev.codeleap.co.uk/careers/";
 
 export const PostService = {
   async getPosts() {
-    const response = await api.get("");
-    console.log(response);
-    return response.data;
-  },
-
-  async createPost(data: CreatePost) {
-    const response = await api.post("/careers/", data);
-    return response.data;
-  },
-
-  async updatePost(id: number, data: UpdatePost) {
-    const response = await api.patch(`/careers/${id}/`, data);
-    return response.data;
-  },
-
-  async deletePost(id: number) {
-    await api.delete(`/careers/${id}/`);
-  },
-};
-
-export const PostService2 = {
-  async getPosts() {
     try {
-      const response = await fetch("https://dev.codeleap.co.uk/careers/", {
+      const response = await fetch(BASE_URL, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -41,6 +20,68 @@ export const PostService2 = {
       return data;
     } catch (error) {
       console.error("Erro ao buscar posts:", error);
+      throw error;
+    }
+  },
+
+  async createPost(data: CreatePost) {
+    try {
+      const response = await fetch(BASE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+      return responseData;
+    } catch (error) {
+      console.error("Erro ao criar post:", error);
+      throw error;
+    }
+  },
+
+  async updatePost(id: number, data: UpdatePost) {
+    try {
+      const response = await fetch(`${BASE_URL}${id}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseData = await response.json();
+      return responseData;
+    } catch (error) {
+      console.error("Erro ao atualizar post:", error);
+      throw error;
+    }
+  },
+
+  async deletePost(id: number) {
+    try {
+      const response = await fetch(`${BASE_URL}${id}/`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Erro ao deletar post:", error);
       throw error;
     }
   },
