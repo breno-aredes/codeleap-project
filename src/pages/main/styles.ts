@@ -20,3 +20,14 @@ export const Main = styled.main`
   gap: 24px;
   box-sizing: border-box;
 `;
+
+export const NoItens = styled.div`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

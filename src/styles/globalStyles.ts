@@ -44,4 +44,11 @@ export const InputContent = styled.div`
     font-size: 16px;
     margin-bottom: 8px;
   }
+
+  span {
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 6px;
+  }
 `;

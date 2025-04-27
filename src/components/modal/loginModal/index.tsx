@@ -4,6 +4,7 @@ import { ModalContent } from "./styles";
 import Button from "../../button";
 import { ButtonContent, InputContent } from "../../../styles/globalStyles";
 import { useUser } from "../../../hooks/useUser";
+import { toast } from "react-toastify";
 
 const LoginModal = () => {
   const { setUsername, username } = useUser();
@@ -13,12 +14,16 @@ const LoginModal = () => {
   useEffect(() => {
     if (username) {
       setIsVisible(false);
+    } else {
+      setIsVisible(true);
+      setInputUsername("");
     }
   }, [username]);
 
   const handleLogin = () => {
     if (inputUsername.trim() !== "") {
       setUsername(inputUsername);
+      toast.success("Welcome to CodeLeap network!");
       setIsVisible(false);
     }
   };

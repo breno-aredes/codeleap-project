@@ -27,13 +27,13 @@ const Post: React.FC<PostProps> = ({
     try {
       setLoading(true);
       await PostService.deletePost(id);
-      toast.success("Post deletado com sucesso!");
+      toast.success("Post deleted successfully!");
       fetchPosts();
       setDeleteIsVisible(false);
     } catch (error) {
       setLoading(false);
       console.error("Erro ao deletar o post:", error);
-      toast.error("Erro ao deletar o post. Tente novamente.");
+      toast.error("Error deleting the post. Please try again.");
     }
   };
 

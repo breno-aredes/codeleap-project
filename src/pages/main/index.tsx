@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PostSchema } from "../../schemas/posts.schemas";
 import { PostData } from "./types";
 import { useUser } from "../../hooks/useUser";
+import { toast } from "react-toastify";
 
 const MainScreen: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
@@ -45,10 +46,11 @@ const MainScreen: React.FC = () => {
         created_datetime: new Date().toISOString(),
       });
       await fetchPosts();
-      setLoading(false);
+      toast.success("Post created successfully!");
       formMethods.reset();
     } catch (error) {
       setLoading(false);
+      toast.error("Error creating the post. Please try again.");
       console.error("Erro ao criar post:", error);
     }
   };
@@ -62,6 +64,10 @@ const MainScreen: React.FC = () => {
       <Header />
       <S.Main>
         <PostForm useForm={formMethods} onConfirm={handleCreatePost} />
+
+        {posts.length === 0 && (
+          <S.NoItens>Your feed is empty, make a post to get started.</S.NoItens>
+        )}
 
         {posts.map((post) => (
           <Post

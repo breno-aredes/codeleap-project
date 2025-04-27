@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PostService } from "../../../services/post";
 import { useLoading } from "../../../hooks/useLoading";
 import { PostSchema } from "../../../schemas/posts.schemas";
+import { toast } from "react-toastify";
 
 const EditPost: React.FC<EditPostProps> = ({
   isVisible,
@@ -29,10 +30,11 @@ const EditPost: React.FC<EditPostProps> = ({
       setLoading(true);
       await PostService.updatePost(postId, data);
       fetchPosts();
-      setLoading(false);
+      toast.success("Post updated successfully!");
       setIsVisible(false);
     } catch (error) {
       setLoading(false);
+      toast.error("Failed to update the post. Please try again.");
       console.error("Erro ao atualizar o post:", error);
     }
   };

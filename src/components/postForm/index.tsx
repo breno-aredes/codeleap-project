@@ -35,7 +35,9 @@ const PostForm: React.FC<PostFormProps> = ({
             placeholder="Hello world"
             {...register("title", { required: true })}
           />
-          {formState.errors.title && <span>Title is required</span>}
+          {formState.errors.title && (
+            <span>{formState.errors.title.message}</span>
+          )}
         </InputContent>
 
         <InputContent>
@@ -44,7 +46,9 @@ const PostForm: React.FC<PostFormProps> = ({
             placeholder="Content here"
             {...register("content", { required: true })}
           />
-          {formState.errors.content && <span>Content is required</span>}
+          {formState.errors.content && (
+            <span>{formState.errors.content.message}</span>
+          )}
         </InputContent>
 
         {isEdit && setIsVisible ? (
@@ -52,13 +56,13 @@ const PostForm: React.FC<PostFormProps> = ({
             <Button color="white" onClick={() => setIsVisible(false)}>
               Cancel
             </Button>
-            <Button color="green" type="submit">
+            <Button color="green" type="submit" disabled={!formState.isValid}>
               Save
             </Button>
           </ButtonContent>
         ) : (
           <ButtonContent>
-            <Button color="blue" type="submit">
+            <Button color="blue" type="submit" disabled={!formState.isValid}>
               Create
             </Button>
           </ButtonContent>
