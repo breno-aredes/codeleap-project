@@ -1,54 +1,71 @@
-# React + TypeScript + Vite
+# Codeleap Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introdução
 
-Currently, two official plugins are available:
+O **Codeleap Project** é uma aplicação desenvolvida como desafio de front-end. O objetivo principal é demonstrar habilidades em React, gerenciamento de estado, estilização e boas práticas com TypeScript. Este projeto segue uma abordagem moderna com tecnologias de ponta para criar uma experiência de usuário eficiente e responsiva.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- **Postagens**:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - Visualizar todas as postagens:
+  - Exibe uma lista de postagens criadas por usuários.
+  - Criar uma postagem:
+    - Permite a criação de postagens com título e conteúdo.
+  - Editar uma postagem (modal):
+    - Atualiza o título ou conteúdo de uma postagem existente.
+  - Excluir uma postagem (modal):
+    - Remove uma postagem selecionada após confirmação.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+  ![Página Inicial](src/assets/homepage.png)
+
+## Instalação e Execução
+
+1. Clone o repositório:
+
+```sh
+git clone git@github.com:breno-aredes/codeleap-project.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Acesse o diretório do projeto:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+cd codeleap-project
 ```
+
+3. Instale as dependências:
+
+```sh
+npm install
+```
+
+4. Inicie o servidor de desenvolvimento:
+
+```sh
+npm run dev
+```
+
+## Tecnologias Utilizadas
+
+- **React:** Biblioteca para construção da interface do usuário.
+- **React Hook Form:** Biblioteca para gerenciamento de formulários.
+- **Yup:** Biblioteca para validação de formulários.
+- **Styled Components:** Biblioteca para estilização de componentes.
+- **React Icons:** Biblioteca de ícones para React.
+- **React Toastify:** Biblioteca para notificações.
+- **TanStack React Query:** Gerenciamento de estado assíncrono e cache de dados.
+- **TypeScript:** Superset do JavaScript que adiciona tipagem estática.
+- **Vite:** Ferramenta de build rápida e configurável.
+
+## Scripts Disponíveis
+
+- `npm run dev`: Inicia o servidor de desenvolvimento.
+- `npm run build`: Faz o build do projeto para produção.
+- `npm run preview`: Visualiza o build de produção localmente.
+
+## Link do Deploy
+
+O projeto está disponível online e pode ser acessado através do seguinte link:
+[Deploy do Projeto](https://codeleap-project.vercel.app/)
+
+---
