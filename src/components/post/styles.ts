@@ -42,6 +42,7 @@ export const PostData = styled.div`
     font-size: 18px;
     color: ${({ theme }) => theme.colors.text};
     margin-top: 16px;
+    white-space: pre-line;
   }
 `;
 
