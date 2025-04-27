@@ -8,6 +8,7 @@ import DeletePost from "../modal/deletePost";
 import { useUser } from "../../hooks/useUser";
 import { PostService } from "../../services/post";
 import { toast } from "react-toastify";
+import { useLoading } from "../../hooks/useLoading";
 
 const Post: React.FC<PostProps> = ({
   title,
@@ -20,14 +21,17 @@ const Post: React.FC<PostProps> = ({
   const [editIsVisible, setEditIsVisible] = useState(false);
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
   const { username } = useUser();
+  const { setLoading } = useLoading();
 
   const handleDelete = async () => {
     try {
+      setLoading(true);
       await PostService.deletePost(id);
       toast.success("Post deletado com sucesso!");
       fetchPosts();
       setDeleteIsVisible(false);
     } catch (error) {
+      setLoading(false);
       console.error("Erro ao deletar o post:", error);
       toast.error("Erro ao deletar o post. Tente novamente.");
     }

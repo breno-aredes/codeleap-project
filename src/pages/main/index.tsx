@@ -6,6 +6,7 @@ import PostForm from "../../components/postForm";
 import Post from "../../components/post";
 import { PostService } from "../../services/post";
 import formatTime from "../../utils/formatTime";
+import { useLoading } from "../../hooks/useLoading";
 
 interface PostData {
   id: number;
@@ -17,13 +18,16 @@ interface PostData {
 
 const MainScreen: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
-
+  const { setLoading } = useLoading();
   const fetchPosts = async () => {
     try {
+      setLoading(true);
       const data = await PostService.getPosts();
 
       setPosts(data.results || []);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Erro ao buscar posts:", error);
     }
   };
