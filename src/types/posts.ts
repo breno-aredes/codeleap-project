@@ -2,6 +2,7 @@ export interface CreatePost {
   username: string;
   title: string;
   content: string;
+  created_datetime: string;
 }
 
 export interface UpdatePost {

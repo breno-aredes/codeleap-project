@@ -64,7 +64,14 @@ const Post: React.FC<PostProps> = ({
         <h3>{text}</h3>
       </S.PostData>
 
-      <EditPost isVisible={editIsVisible} setIsVisible={setEditIsVisible} />
+      <EditPost
+        isVisible={editIsVisible}
+        setIsVisible={setEditIsVisible}
+        postId={id}
+        fetchPosts={fetchPosts}
+        title={title}
+        content={text}
+      />
       <DeletePost
         isVisible={deleteIsVisible}
         setIsVisible={setDeleteIsVisible}
