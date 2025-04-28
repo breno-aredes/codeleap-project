@@ -1,71 +1,71 @@
 # Codeleap Project
 
-## Introdução
+## Introduction
 
-O **Codeleap Project** é uma aplicação desenvolvida como desafio de front-end. O objetivo principal é demonstrar habilidades em React, gerenciamento de estado, estilização e boas práticas com TypeScript. Este projeto segue uma abordagem moderna com tecnologias de ponta para criar uma experiência de usuário eficiente e responsiva.
+The **Codeleap Project** is an application developed as a front-end challenge. Its main goal is to demonstrate skills in React, state management, styling, and best practices with TypeScript. This project follows a modern approach using cutting-edge technologies to create an efficient and responsive user experience.
 
-## Funcionalidades
+## Features
 
-- **Postagens**:
+- **Posts**:
 
-  - Visualizar todas as postagens:
-  - Exibe uma lista de postagens criadas por usuários.
-  - Criar uma postagem:
-    - Permite a criação de postagens com título e conteúdo.
-  - Editar uma postagem (modal):
-    - Atualiza o título ou conteúdo de uma postagem existente.
-  - Excluir uma postagem (modal):
-    - Remove uma postagem selecionada após confirmação.
+  - View all posts:
+    - Displays a list of posts created by users.
+  - Create a post:
+    - Allows the creation of posts with a title and content.
+  - Edit a post (modal):
+    - Updates the title or content of an existing post.
+  - Delete a post (modal):
+    - Removes a selected post after confirmation.
 
-  ![Página Inicial](src/assets/homepage.png)
+  ![Homepage](src/assets/homepage.png)
 
-## Instalação e Execução
+## Installation and Execution
 
-1. Clone o repositório:
+1. Clone the repository:
 
 ```sh
 git clone git@github.com:breno-aredes/codeleap-project.git
 ```
 
-2. Acesse o diretório do projeto:
+2. Navigate to the project directory:
 
 ```sh
 cd codeleap-project
 ```
 
-3. Instale as dependências:
+3. Install the dependencies:
 
 ```sh
 npm install
 ```
 
-4. Inicie o servidor de desenvolvimento:
+4. Start the development server:
 
 ```sh
 npm run dev
 ```
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **React:** Biblioteca para construção da interface do usuário.
-- **React Hook Form:** Biblioteca para gerenciamento de formulários.
-- **Yup:** Biblioteca para validação de formulários.
-- **Styled Components:** Biblioteca para estilização de componentes.
-- **React Icons:** Biblioteca de ícones para React.
-- **React Toastify:** Biblioteca para notificações.
-- **TanStack React Query:** Gerenciamento de estado assíncrono e cache de dados.
-- **TypeScript:** Superset do JavaScript que adiciona tipagem estática.
-- **Vite:** Ferramenta de build rápida e configurável.
+- **React:** Library for building user interfaces.
+- **React Hook Form:** Library for form management.
+- **Yup:** Library for form validation.
+- **Styled Components:** Library for styling components.
+- **React Icons:** Icon library for React.
+- **React Toastify:** Library for notifications.
+- **TanStack React Query:** Asynchronous state management and data caching.
+- **TypeScript:** JavaScript superset that adds static typing.
+- **Vite:** Fast and configurable build tool.
 
-## Scripts Disponíveis
+## Available Scripts
 
-- `npm run dev`: Inicia o servidor de desenvolvimento.
-- `npm run build`: Faz o build do projeto para produção.
-- `npm run preview`: Visualiza o build de produção localmente.
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the project for production.
+- `npm run preview`: Previews the production build locally.
 
-## Link do Deploy
+## Deployment Link
 
-O projeto está disponível online e pode ser acessado através do seguinte link:
-[Deploy do Projeto](https://codeleap-project.vercel.app/)
+The project is available online and can be accessed through the following link:
+[Project Deployment](https://codeleap-project.vercel.app/)
 
 ---
