@@ -14,7 +14,8 @@ import { useLoading } from "../../hooks/useLoading";
 import { FaHeart } from "react-icons/fa";
 import { IoIosChatboxes } from "react-icons/io";
 
-import CommentMentions from "../comment";
+import CommentForm from "../commentForm";
+import Comment from "../comment";
 
 const Post: React.FC<PostProps> = ({
   title,
@@ -84,23 +85,38 @@ const Post: React.FC<PostProps> = ({
       </S.PostData>
 
       <S.PostFooter>
-        <S.ReactionIconsContainer isColored={hasLiked}>
-          <FaHeart onClick={handleLike} />
-          <span>{likes}</span>
-        </S.ReactionIconsContainer>
-        <S.ReactionIconsContainer isColored={isCommentOpen}>
-          <IoIosChatboxes
-            onClick={() => {
-              setIsCommentOpen(!isCommentOpen);
-            }}
+        <S.ReactionContainer>
+          <S.ReactionIconsContainer isColored={hasLiked}>
+            <FaHeart onClick={handleLike} />
+            <span>{likes}</span>
+          </S.ReactionIconsContainer>
+          <S.ReactionIconsContainer isColored={isCommentOpen}>
+            <IoIosChatboxes
+              onClick={() => {
+                setIsCommentOpen(!isCommentOpen);
+              }}
+            />
+            <span>1 </span>
+          </S.ReactionIconsContainer>
+        </S.ReactionContainer>
+
+        <S.CommentSection>
+          <Comment
+            name="teste"
+            content="blablablbablabla fdskj çdfjsflkas fçads çfasdç fjadçsf jçads jfçadsjfçljsçfdjsa çff jdflç ajsfa dsfaslkfa djlk "
+            timestamp="1231"
           />
-          <span>0 </span>
-        </S.ReactionIconsContainer>
+          <Comment
+            name="teste2 "
+            content="blablablbablabla "
+            timestamp="12:31"
+          />
+        </S.CommentSection>
       </S.PostFooter>
 
       {isCommentOpen && (
         <S.CommentSection>
-          <CommentMentions />
+          <CommentForm />
         </S.CommentSection>
       )}
 

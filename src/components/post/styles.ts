@@ -17,6 +17,7 @@ export const IconsContainer = styled.div`
     border-radius: 50%;
     transition: background-color 0.5s;
     padding: 5px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
@@ -86,7 +87,7 @@ export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
     transition: transform 0.3s;
     color: ${({ theme, isColored }) =>
       isColored ? theme.colors.primary : theme.colors.secondary};
-
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     &:hover {
       transform: scale(1.2);
     }
@@ -95,14 +96,24 @@ export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
 
 export const PostFooter = styled.footer`
   display: flex;
+  flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
-  padding: 16px;
   border-radius: 0px 0px 15px 15px;
   gap: 24px;
+`;
+
+export const ReactionContainer = styled.div`
+  display: flex;
+  padding-bottom: 10px;
+  gap: 24px;
+  padding: 16px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
 `;
 
 export const CommentSection = styled.div`
   display: flex;
   flex-direction: column;
   padding: 24px;
+  margin-bottom: 20px;
+  gap: 28px;
 `;

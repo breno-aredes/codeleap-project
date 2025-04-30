@@ -1,58 +1,41 @@
-import React, { useState } from "react";
-import { InputContent } from "../../styles/globalStyles";
+import React from "react";
 import * as S from "./styles";
-import Button from "../button";
+// import { useUser } from "../../hooks/useUser";
+import EditIcon from "../../assets/edit.svg";
+import TrashIcon from "../../assets/trash.svg";
+import { FaHeart } from "react-icons/fa";
 
-const CommentMentions = () => {
-  const [text, setText] = useState("");
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [users] = useState(["breno-aredes", "john-doe", "jane-smith"]);
-  const [filteredUsers, setFilteredUsers] = useState<string[]>([]);
+interface CommentProps {
+  name: string;
+  content: string;
+  timestamp: string;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    setText(value);
-
-    const match = value.match(/(^|\s)@(\w*)$/);
-    if (match) {
-      const query = match[2];
-      setFilteredUsers(
-        users.filter((user) => user.startsWith(query)).slice(0, 10)
-      );
-      setShowSuggestions(true);
-    } else {
-      setShowSuggestions(false);
-    }
-  };
-
-  const handleUserSelect = (user: string) => {
-    const updatedText = text.replace(/(^|\s)@(\w*)$/, `$1@${user} `);
-    setText(updatedText);
-    setShowSuggestions(false);
-  };
-
+const Comment: React.FC<CommentProps> = ({ name, content, timestamp }) => {
+  //   const { username } = useUser();
   return (
-    <InputContent>
-      <textarea
-        placeholder="Comment here"
-        maxLength={100}
-        value={text}
-        onChange={handleChange}
-      />
-      {showSuggestions && (
-        <S.List>
-          {filteredUsers.map((user) => (
-            <li key={user} onClick={() => handleUserSelect(user)}>
-              {user}
-            </li>
-          ))}
-        </S.List>
-      )}
-      <S.ButtonContent>
-        <Button color="blue">Comment</Button>
-      </S.ButtonContent>
-    </InputContent>
+    <S.Container>
+      <S.Header>
+        <strong>@{name}</strong>
+      </S.Header>
+      <S.Content>
+        {content} <S.Timestamp>{timestamp}</S.Timestamp>
+      </S.Content>
+
+      <S.Footer>
+        {/* {username === name && ( */}
+        <S.IconsContainer>
+          <img src={TrashIcon} alt="Trash" />
+          <img src={EditIcon} alt="Edit" />
+          <S.ReactionIconsContainer>
+            <FaHeart />
+            <span>0</span>
+          </S.ReactionIconsContainer>
+        </S.IconsContainer>
+        {/* )} */}
+      </S.Footer>
+    </S.Container>
   );
 };
 
-export default CommentMentions;
+export default Comment;
