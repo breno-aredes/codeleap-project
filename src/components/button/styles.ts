@@ -13,16 +13,25 @@ const possibleColors = {
     "background-color": Theme.colors.primary,
     border: `1px solid ${Theme.colors.primary}`,
     color: Theme.colors.secondary,
+    "&:hover": {
+      "background-color": "#345bc5",
+    },
   },
   red: {
     "background-color": Theme.colors.red.primaryRed,
     border: `1px solid ${Theme.colors.red.primaryRed}`,
     color: Theme.colors.secondary,
+    "&:hover": {
+      "background-color": "rgba(214, 26, 45, 0.9)",
+    },
   },
   green: {
     "background-color": Theme.colors.green.primaryGreen,
     border: `1px solid ${Theme.colors.green.primaryGreen}`,
     color: Theme.colors.secondary,
+    "&:hover": {
+      "background-color": "rgba(31, 129, 54, 0.9)",
+    },
   },
   disabled: {
     "background-color": Theme.colors.tertiary,
@@ -30,29 +39,27 @@ const possibleColors = {
     color: Theme.colors.secondary,
   },
 };
-export const StyledButton = styled.button<StyledButtonProps>`
-  padding: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: 0.2s;
-  width: 120px;
-  height: 32px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 16px;
 
-  ${({ color, disabled }) => {
-    const styles =
-      possibleColors[
-        disabled ? "disabled" : (color as keyof typeof possibleColors)
-      ];
+export const StyledButton = styled.button<StyledButtonProps>(
+  ({ color, disabled }) => ({
+    ...possibleColors[
+      disabled ? "disabled" : (color as keyof typeof possibleColors)
+    ],
 
-    return `
-      background-color: ${styles["background-color"]};
-      border: ${styles.border};
-      color: ${styles.color};
-    `;
-  }}
-`;
+    padding: "7px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+
+    transition: "0.7s",
+    svg: {
+      width: "1.4rem",
+    },
+    width: "120px",
+    height: "32px",
+    borderRadius: "8px",
+    fontWeight: 700,
+    fontSize: "16px",
+  })
+);

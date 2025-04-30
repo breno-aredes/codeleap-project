@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LoginModal from "../../components/modal/loginModal";
+
 import * as S from "./styles";
 import Header from "../../components/header";
 import PostForm from "../../components/postForm";
@@ -14,6 +14,7 @@ import { PostSchema } from "../../schemas/posts.schemas";
 import { PostData } from "./types";
 import { useUser } from "../../hooks/useUser";
 import { toast } from "react-toastify";
+import AuthModals from "../../components/modal/authModals";
 
 const MainScreen: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
@@ -81,7 +82,7 @@ const MainScreen: React.FC = () => {
           />
         ))}
       </S.Main>
-      <LoginModal />
+      <AuthModals />
     </S.Body>
   );
 };

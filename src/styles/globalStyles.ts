@@ -10,7 +10,6 @@ export const ButtonContent = styled.div`
 export const InputContent = styled.div`
   display: flex;
   flex-direction: column;
-
   input,
   textarea {
     width: 100%;

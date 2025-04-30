@@ -8,11 +8,18 @@ export const PostContainer = styled.div`
 export const IconsContainer = styled.div`
   display: flex;
   gap: 24px;
+
   img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     color: ${({ theme }) => theme.colors.secondary};
     cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.5s;
+    padding: 5px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
 `;
 

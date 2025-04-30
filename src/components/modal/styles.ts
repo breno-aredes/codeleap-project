@@ -26,4 +26,5 @@ export const ModalContainer = styled.div<{ isWide: boolean }>`
   flex-direction: column;
   border: 1px solid ${({ theme }) => theme.colors.tertiary};
   opacity: 1;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 `;

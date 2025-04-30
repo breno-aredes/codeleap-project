@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import * as S from "./styles";
 import { ModalProps } from "./types";
+import AnimatedModalWrapper from "../animeted";
 
 const Modal: React.FC<ModalProps> = ({
   children,
   isVisible,
   isWide,
   setIsVisible,
+  direction = -1,
 }) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -30,7 +32,11 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <S.ModalBackground isWide={isWide}>
-      <S.ModalContainer isWide={isWide}>{children}</S.ModalContainer>
+      <AnimatedModalWrapper direction={direction}>
+        {direction !== 2 && (
+          <S.ModalContainer isWide={isWide}>{children}</S.ModalContainer>
+        )}
+      </AnimatedModalWrapper>
     </S.ModalBackground>
   );
 };
