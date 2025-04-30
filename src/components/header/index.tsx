@@ -15,7 +15,7 @@ const Header = () => {
         }}
       >
         <IoExitOutline size={25} />
-        <span>Sair</span>
+        <span>Leave</span>
       </S.ExitButton>
     </S.HeaderContent>
   );

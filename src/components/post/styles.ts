@@ -69,3 +69,40 @@ export const PostMain = styled.main`
     text-align: right;
   }
 `;
+
+export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
+  svg {
+    width: 23px;
+    height: 23px;
+
+    cursor: pointer;
+    transition: transform 0.3s;
+    color: ${({ theme, isColored }) =>
+      isColored ? theme.colors.primary : theme.colors.secondary};
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+`;
+
+export const PostFooter = styled.footer`
+  display: flex;
+  background-color: ${({ theme }) => theme.colors.background};
+  padding: 16px;
+  border-radius: 0px 0px 15px 15px;
+  gap: 24px;
+`;
+
+export const CommentSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+`;
