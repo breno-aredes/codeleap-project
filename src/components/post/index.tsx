@@ -17,29 +17,22 @@ import { IoIosChatboxes } from "react-icons/io";
 import CommentForm from "../commentForm";
 import Comment from "../comment";
 import { useAuth } from "../../hooks/useAuth";
+import formatTime from "../../utils/formatTime";
 
-const Post: React.FC<PostProps> = ({
-  title,
-  name,
-  time,
-  text,
-  id,
-  fetchPosts,
-}) => {
+const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
-  const [likes, setLikes] = useState(0);
-  const [hasLiked, setHasLiked] = useState(false);
+  const [likes, setLikes] = useState(data.likes_count);
+  const [hasLiked, setHasLiked] = useState(data.is_liked);
   const { username } = useAuth();
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const { setLoading } = useLoading();
   const postService = PostService();
-  console.log(username);
 
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await postService.deletePost(id);
+      await postService.deletePost(data.id);
       toast.success("Post deleted successfully!");
       fetchPosts();
       setDeleteIsVisible(false);
@@ -50,21 +43,31 @@ const Post: React.FC<PostProps> = ({
     }
   };
 
-  const handleLike = () => {
-    if (hasLiked) {
-      setLikes((prevLikes) => prevLikes - 1);
-      setHasLiked(false);
-    } else {
-      setLikes((prevLikes) => prevLikes + 1);
-      setHasLiked(true);
+  const handleLike = async () => {
+    try {
+      setLoading(true);
+      if (hasLiked) {
+        setLikes((prevLikes) => prevLikes - 1);
+        setHasLiked(false);
+      } else {
+        setLikes((prevLikes) => prevLikes + 1);
+        setHasLiked(true);
+      }
+      await postService.likePost(data.id);
+      fetchPosts();
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error liking the post:", error);
+      toast.error("Error liking the post. Please try again.");
     }
   };
 
   return (
     <S.PostContainer>
       <S.PostHeader>
-        <h1>{title}</h1>
-        {username === name && (
+        <h1>{data.title}</h1>
+        {username === data.username && (
           <S.IconsContainer>
             <img
               src={TrashIcon}
@@ -81,10 +84,10 @@ const Post: React.FC<PostProps> = ({
       </S.PostHeader>
       <S.PostData>
         <S.PostMain>
-          <h2>@{name}</h2>
-          <p>{time}</p>
+          <h2>@{data.username}</h2>
+          <p>{formatTime(data.created_datetime)}</p>
         </S.PostMain>
-        <h3>{text}</h3>
+        <h3>{data.content}</h3>
       </S.PostData>
 
       <S.PostFooter>
@@ -101,6 +104,7 @@ const Post: React.FC<PostProps> = ({
             />
             <span>1 </span>
           </S.ReactionIconsContainer>
+          <span> ver comentarios</span>
         </S.ReactionContainer>
 
         <S.CommentSection style={{ marginBottom: "20px" }}>
@@ -126,10 +130,10 @@ const Post: React.FC<PostProps> = ({
       <EditPost
         isVisible={editIsVisible}
         setIsVisible={setEditIsVisible}
-        postId={id}
+        postId={data.id}
         fetchPosts={fetchPosts}
-        title={title}
-        content={text}
+        title={data.title}
+        content={data.content}
       />
       <DeletePost
         isVisible={deleteIsVisible}

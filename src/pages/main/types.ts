@@ -4,4 +4,6 @@ export interface PostData {
   username: string;
   created_datetime: string;
   content: string;
+  likes_count: number;
+  is_liked: boolean;
 }

@@ -60,7 +60,7 @@ const MainScreen: React.FC = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [username]);
 
   return (
     <S.Body>
@@ -73,15 +73,7 @@ const MainScreen: React.FC = () => {
         )}
 
         {posts.map((post) => (
-          <Post
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            name={post.username}
-            time={formatTime(post.created_datetime)}
-            text={post.content}
-            fetchPosts={fetchPosts}
-          />
+          <Post data={post} fetchPosts={fetchPosts} />
         ))}
       </S.Main>
       <AuthModals />

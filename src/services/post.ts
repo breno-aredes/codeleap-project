@@ -32,5 +32,11 @@ export const PostService = () => {
     });
   };
 
-  return { getPosts, createPost, updatePost, deletePost };
+  const likePost = async (id: number) => {
+    return authenticatedFetch(`${BASE_URL}${id}/like/`, {
+      method: "POST",
+    });
+  };
+
+  return { getPosts, createPost, updatePost, deletePost, likePost };
 };
