@@ -34,7 +34,7 @@ export const Content = styled.p`
   display: flex;
   justify-content: space-between;
   padding: 8px;
-
+  white-space: pre-line;
   span {
     width: auto;
     font-weight: 500;

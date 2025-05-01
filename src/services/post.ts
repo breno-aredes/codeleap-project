@@ -1,4 +1,9 @@
-import { CreateCommentType, CreatePost, UpdatePost } from "../types/posts";
+import {
+  CreateCommentType,
+  CreatePost,
+  UpdateComment,
+  UpdatePost,
+} from "../types/posts";
 import { useAuthenticatedFetch } from "./authenticatedFetch";
 
 //normalmente ficaria na .env deixei aqui para facilitar rodar o projeto.
@@ -59,6 +64,13 @@ export const PostService = () => {
     });
   };
 
+  const updateComment = async (postId: number, data: UpdateComment) => {
+    return authenticatedFetch(`${BASE_URL}${postId}/comments/`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+  };
+
   return {
     getPosts,
     createPost,
@@ -68,5 +80,6 @@ export const PostService = () => {
     loadPostComments,
     CreateComment,
     deleteComment,
+    updateComment,
   };
 };

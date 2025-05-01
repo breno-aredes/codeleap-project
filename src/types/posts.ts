@@ -13,3 +13,8 @@ export interface UpdatePost {
 export interface CreateCommentType {
   content: string;
 }
+
+export interface UpdateComment {
+  comment_id: string;
+  content: string;
+}

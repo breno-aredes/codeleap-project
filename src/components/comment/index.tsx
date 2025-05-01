@@ -9,6 +9,7 @@ import DeleteComment from "../modal/deleteItem";
 import { useLoading } from "../../hooks/useLoading";
 import { PostService } from "../../services/post";
 import { toast } from "react-toastify";
+import EditComment from "../modal/editComment";
 
 const Comment: React.FC<CommentProps> = ({
   name,
@@ -20,6 +21,7 @@ const Comment: React.FC<CommentProps> = ({
   loadComents,
 }) => {
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
+  const [editIsVisible, setEditIsVisible] = useState(false);
   // const { username } = useAuth();
   const { setLoading } = useLoading();
   const postService = PostService();
@@ -60,7 +62,6 @@ const Comment: React.FC<CommentProps> = ({
 
         <S.Timestamp>{timestamp}</S.Timestamp>
       </S.Content>
-
       <S.Footer>
         <S.IconsContainer>
           {/* {username === name && ( */}
@@ -70,7 +71,11 @@ const Comment: React.FC<CommentProps> = ({
               alt="Trash"
               onClick={() => setDeleteIsVisible(true)}
             />
-            <img src={EditIcon} alt="Edit" />
+            <img
+              src={EditIcon}
+              alt="Edit"
+              onClick={() => setEditIsVisible(true)}
+            />
           </>
           {/*  )} */}
           <S.ReactionIconsContainer>
@@ -79,11 +84,19 @@ const Comment: React.FC<CommentProps> = ({
           </S.ReactionIconsContainer>
         </S.IconsContainer>
       </S.Footer>
-
       <DeleteComment
         isVisible={deleteIsVisible}
         onConfirm={handleDelete}
         setIsVisible={setDeleteIsVisible}
+      />
+      <EditComment
+        commentId={commentId}
+        content={content}
+        isVisible={editIsVisible}
+        loadComents={loadComents}
+        postId={postId}
+        setIsVisible={setEditIsVisible}
+        key={commentId}
       />
     </S.Container>
   );

@@ -37,6 +37,26 @@ export const InputContent = styled.div`
     resize: none;
     font-family: "Roboto", sans-serif;
     font-size: 14px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      border-radius: 50px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.colors.inputBorder};
+      border-radius: 50px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: ${({ theme }) => theme.colors.primary};
+      border-radius: 50px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: ${({ theme }) => theme.colors.background};
+      border-radius: 50px;
+    }
   }
 
   label {

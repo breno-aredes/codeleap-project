@@ -5,20 +5,35 @@ import Button from "../button";
 import { useLoading } from "../../hooks/useLoading";
 import { PostService } from "../../services/post";
 import { toast } from "react-toastify";
-import { CommentFormProps } from "./types";
+import { CommentFormProps, commentType } from "./types";
+import { CommentSchema } from "../../schemas/comment.schema";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
   const { setLoading } = useLoading();
   const postService = PostService();
 
-  const [text, setText] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [users] = useState(["breno-aredes", "john-doe", "jane-smith"]);
   const [filteredUsers, setFilteredUsers] = useState<string[]>([]);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+    setValue,
+    watch,
+  } = useForm<commentType>({
+    resolver: yupResolver(CommentSchema),
+    mode: "onChange",
+  });
+
+  const text = watch("content") || "";
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    setText(value);
+    setValue("content", value);
 
     const match = value.match(/(^|\s)@(\w*)$/);
     if (match) {
@@ -34,25 +49,20 @@ const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
 
   const handleUserSelect = (user: string) => {
     const updatedText = text.replace(/(^|\s)@(\w*)$/, `$1@${user} `);
-    setText(updatedText);
+    setValue("content", updatedText);
     setShowSuggestions(false);
   };
 
-  const handleCreateComment = async () => {
-    if (!text.trim()) {
-      toast.error("Comment cannot be empty.");
-      return;
-    }
-
+  const handleCreateComment = async (data: commentType) => {
     try {
       setLoading(true);
 
       await postService.CreateComment(postId, {
-        content: text.trim(),
+        content: data.content.trim(),
       });
       await loadComents();
       toast.success("Comment created successfully!");
-      setText("");
+      setValue("content", "");
       setLoading(false);
     } catch (error) {
       toast.error("Error creating the comment. Please try again.");
@@ -66,6 +76,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
       <textarea
         placeholder="Comment here"
         maxLength={100}
+        {...register("content")}
         value={text}
         onChange={handleChange}
       />
@@ -79,7 +90,11 @@ const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
         </S.List>
       )}
       <S.ButtonContent>
-        <Button color="blue" onClick={handleCreateComment}>
+        <Button
+          color="blue"
+          onClick={handleSubmit(handleCreateComment)}
+          disabled={!isValid}
+        >
           Comment
         </Button>
       </S.ButtonContent>
