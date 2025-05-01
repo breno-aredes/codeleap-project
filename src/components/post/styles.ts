@@ -99,20 +99,37 @@ export const PostFooter = styled.footer`
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 0px 0px 15px 15px;
-  gap: 24px;
 `;
 
 export const ReactionContainer = styled.div`
   display: flex;
-  padding-bottom: 10px;
+  gap: 24px;
+`;
+
+export const ReactionSection = styled.div`
   gap: 24px;
   padding: 16px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.secondary};
+`;
+
+export const CommentOpen = styled.div<{ isOpen: boolean }>`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: ${({ theme }) => theme.colors.secondary};
+  svg {
+    transition: transform 0.3s ease-in-out;
+    transform: ${({ isOpen }) => (!isOpen ? "rotate(180deg)" : "rotate(0deg)")};
+  }
 `;
 
 export const CommentSection = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.colors.secondary};
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 30px 24px 24px 24px;
+
   gap: 28px;
+  transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
 `;

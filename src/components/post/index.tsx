@@ -18,6 +18,7 @@ import CommentForm from "../commentForm";
 import Comment from "../comment";
 import { useAuth } from "../../hooks/useAuth";
 import formatTime from "../../utils/formatTime";
+import { AiOutlineCaretDown } from "react-icons/ai";
 
 const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
@@ -28,6 +29,7 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const { setLoading } = useLoading();
   const postService = PostService();
+  const [commentIsOpen, setCommentIsOpen] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -91,34 +93,43 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
       </S.PostData>
 
       <S.PostFooter>
-        <S.ReactionContainer>
-          <S.ReactionIconsContainer isColored={hasLiked}>
-            <FaHeart onClick={handleLike} />
-            <span>{likes}</span>
-          </S.ReactionIconsContainer>
-          <S.ReactionIconsContainer isColored={isCommentOpen}>
-            <IoIosChatboxes
-              onClick={() => {
-                setIsCommentOpen(!isCommentOpen);
-              }}
-            />
-            <span>1 </span>
-          </S.ReactionIconsContainer>
-          <span> ver comentarios</span>
-        </S.ReactionContainer>
+        <S.ReactionSection>
+          <S.ReactionContainer>
+            <S.ReactionIconsContainer isColored={hasLiked}>
+              <FaHeart onClick={handleLike} />
+              <span>{likes}</span>
+            </S.ReactionIconsContainer>
+            <S.ReactionIconsContainer isColored={isCommentOpen}>
+              <IoIosChatboxes
+                onClick={() => {
+                  setIsCommentOpen(!isCommentOpen);
+                }}
+              />
+              <span>1 </span>
+            </S.ReactionIconsContainer>
+          </S.ReactionContainer>
+          <S.CommentOpen
+            isOpen={commentIsOpen}
+            onClick={() => setCommentIsOpen(!commentIsOpen)}
+          >
+            <AiOutlineCaretDown /> ver comentarios <AiOutlineCaretDown />
+          </S.CommentOpen>
+        </S.ReactionSection>
 
-        <S.CommentSection style={{ marginBottom: "20px" }}>
-          <Comment
-            name="teste"
-            content="blablablbablabla fdskj çdfjsflkas fçads çfasdç fjadçsf jçads jfçadsjfçljsçfdjsa çff jdflç ajsfa dsfaslkfa djlk "
-            timestamp="1231"
-          />
-          <Comment
-            name="teste2 "
-            content="blablablbablabla "
-            timestamp="12:31"
-          />
-        </S.CommentSection>
+        {commentIsOpen && (
+          <S.CommentSection style={{ marginBottom: "20px" }}>
+            <Comment
+              name="teste"
+              content="blablablbablabla fdskj çdfjsflkas fçads çfasdç fjadçsf jçads jfçadsjfçljsçfdjsa çff jdflç ajsfa dsfaslkfa djlk "
+              timestamp="1231"
+            />
+            <Comment
+              name="teste2 "
+              content="blablablbablabla "
+              timestamp="12:31"
+            />
+          </S.CommentSection>
+        )}
       </S.PostFooter>
 
       {isCommentOpen && (

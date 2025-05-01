@@ -5,7 +5,6 @@ import Header from "../../components/header";
 import PostForm from "../../components/postForm";
 import Post from "../../components/post";
 import { PostService } from "../../services/post";
-import formatTime from "../../utils/formatTime";
 import { useLoading } from "../../hooks/useLoading";
 import { useForm } from "react-hook-form";
 
