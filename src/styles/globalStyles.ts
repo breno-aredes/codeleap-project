@@ -46,7 +46,7 @@ export const InputContent = styled.div`
   }
 
   span {
-    color: red;
+    color: ${({ theme }) => theme.colors.red.primaryRed};
     font-weight: 400;
     font-size: 12px;
     margin-top: 6px;

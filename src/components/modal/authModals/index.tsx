@@ -6,13 +6,13 @@ import LoginForm from "./signin";
 import SignUp from "./signup";
 
 const AuthModals = () => {
-  const { username } = useAuth();
+  const { isAuth } = useAuth();
   const [isVisible, setIsVisible] = useState(true);
   const [direction, setDirection] = useState(-1);
 
   useEffect(() => {
-    setIsVisible(!username);
-  }, [username]);
+    setIsVisible(!isAuth());
+  }, [isAuth]);
 
   const handleChangeDirection = (newDirection: number) => {
     setDirection(newDirection);

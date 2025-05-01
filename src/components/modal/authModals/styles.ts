@@ -29,4 +29,12 @@ export const ModalContent = styled.div`
     flex-direction: column;
     gap: 16px;
   }
+
+  h2 {
+    color: ${({ theme }) => theme.colors.red.primaryRed};
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 4px;
+  }
 `;

@@ -13,11 +13,9 @@ const AuthService = {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Erro ao registrar o usuário.");
+      if (response.status === 400) {
+        throw new Error("email already registered");
       }
-
       return await response.json();
     } catch (error: any) {
       throw new Error(error.message || "Erro de conexão.");
@@ -36,7 +34,8 @@ const AuthService = {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Erro ao logar o usuário.");
+
+        throw new Error(errorData.detail);
       }
 
       return await response.json();
