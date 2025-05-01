@@ -24,4 +24,9 @@ export const ModalContent = styled.div`
   input {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 `;

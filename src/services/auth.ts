@@ -1,18 +1,9 @@
+import { FirebaseAuthUser, LoginData, RegisterData } from "../types/auth";
+
 const BASE_URL = "https://posts-manager-api.onrender.com/api/careers";
 
-interface RegisterData {
-  username: string;
-  email: string;
-  password: string;
-}
-
-interface LoginData {
-  email: string;
-  password: string;
-}
-
 const AuthService = {
-  async register(data: RegisterData): Promise<any> {
+  async register(data: RegisterData): Promise<FirebaseAuthUser> {
     try {
       const response = await fetch(`${BASE_URL}/register/`, {
         method: "POST",
@@ -33,7 +24,7 @@ const AuthService = {
     }
   },
 
-  async login(data: LoginData): Promise<any> {
+  async login(data: LoginData): Promise<FirebaseAuthUser> {
     try {
       const response = await fetch(`${BASE_URL}/login/`, {
         method: "POST",
