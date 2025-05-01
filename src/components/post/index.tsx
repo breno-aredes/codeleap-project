@@ -151,6 +151,8 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
                 mentions={comment.mentioned_users}
                 timestamp={formatTime(comment.created_at)}
                 loadComents={fetchLoadComments}
+                likesCount={comment.likes_count}
+                isLiked={comment.is_liked}
               />
             ))}
           </S.CommentSection>

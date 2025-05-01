@@ -20,4 +20,6 @@ export interface CommentPost {
   content: string;
   created_at: string;
   mentioned_users: string[];
+  likes_count: number;
+  is_liked: boolean;
 }

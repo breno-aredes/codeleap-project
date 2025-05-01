@@ -6,4 +6,6 @@ export interface CommentProps {
   commentId: string;
   postId: number;
   loadComents: () => Promise<void>;
+  likesCount: number;
+  isLiked: boolean;
 }

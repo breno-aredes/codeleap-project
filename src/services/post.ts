@@ -71,6 +71,12 @@ export const PostService = () => {
     });
   };
 
+  const likeComment = async (commentId: string) => {
+    return authenticatedFetch(`${BASE_URL}comments/${commentId}/like/`, {
+      method: "POST",
+    });
+  };
+
   return {
     getPosts,
     createPost,
@@ -81,5 +87,6 @@ export const PostService = () => {
     CreateComment,
     deleteComment,
     updateComment,
+    likeComment,
   };
 };

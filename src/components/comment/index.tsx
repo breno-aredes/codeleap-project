@@ -19,12 +19,17 @@ const Comment: React.FC<CommentProps> = ({
   commentId,
   postId,
   loadComents,
+  likesCount,
+  isLiked,
 }) => {
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
   const [editIsVisible, setEditIsVisible] = useState(false);
+  const [likes, setLikes] = useState(likesCount);
+  const [hasLiked, setHasLiked] = useState(isLiked);
   // const { username } = useAuth();
   const { setLoading } = useLoading();
   const postService = PostService();
+
   const highlightMentions = (text: string, mentions: string[]) => {
     const mentionRegex = new RegExp(`@(${mentions.join("|")})`, "gi");
     return text
@@ -47,8 +52,28 @@ const Comment: React.FC<CommentProps> = ({
       setDeleteIsVisible(false);
     } catch (error) {
       setLoading(false);
-      console.error("Erro ao deletar o post:", error);
-      toast.error("Error deleting the post. Please try again.");
+      console.error("Erro ao deletar o comentário:", error);
+      toast.error("Error deleting the comment. Please try again.");
+    }
+  };
+
+  const handleLike = async () => {
+    try {
+      setLoading(true);
+      if (hasLiked) {
+        setLikes((prevLikes) => prevLikes - 1);
+        setHasLiked(false);
+      } else {
+        setLikes((prevLikes) => prevLikes + 1);
+        setHasLiked(true);
+      }
+
+      await postService.likeComment(commentId);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error liking the comment:", error);
+      toast.error("Error liking the comment. Please try again later.");
     }
   };
 
@@ -78,9 +103,9 @@ const Comment: React.FC<CommentProps> = ({
             />
           </>
           {/*  )} */}
-          <S.ReactionIconsContainer>
-            <FaHeart />
-            <span>0</span>
+          <S.ReactionIconsContainer isColored={hasLiked}>
+            <FaHeart onClick={handleLike} />
+            <span>{likes}</span>
           </S.ReactionIconsContainer>
         </S.IconsContainer>
       </S.Footer>
