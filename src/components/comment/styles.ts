@@ -24,8 +24,8 @@ export const Header = styled.div`
 `;
 
 export const Timestamp = styled.span`
-  font-size: 0.8rem;
-  color: #888;
+  font-size: 12px;
+  color: #888 !important;
 `;
 
 export const Content = styled.p`
@@ -34,6 +34,12 @@ export const Content = styled.p`
   display: flex;
   justify-content: space-between;
   padding: 8px;
+
+  span {
+    width: auto;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export const Footer = styled.div`
@@ -58,12 +64,10 @@ export const IconsContainer = styled.div`
     height: 20px;
     color: ${({ theme }) => theme.colors.secondary};
     cursor: pointer;
-    border-radius: 50%;
     transition: background-color 0.5s;
     padding: 5px;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
       transform: scale(1.2);
     }
   }

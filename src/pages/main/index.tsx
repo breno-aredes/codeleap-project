@@ -72,7 +72,7 @@ const MainScreen: React.FC = () => {
         )}
 
         {posts.map((post) => (
-          <Post data={post} fetchPosts={fetchPosts} />
+          <Post data={post} fetchPosts={fetchPosts} key={post.id} />
         ))}
       </S.Main>
       <AuthModals />

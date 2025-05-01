@@ -38,5 +38,18 @@ export const PostService = () => {
     });
   };
 
-  return { getPosts, createPost, updatePost, deletePost, likePost };
+  const loadPostComments = async (id: number) => {
+    return authenticatedFetch(`${BASE_URL}${id}/comments/`, {
+      method: "GET",
+    });
+  };
+
+  return {
+    getPosts,
+    createPost,
+    updatePost,
+    deletePost,
+    likePost,
+    loadPostComments,
+  };
 };

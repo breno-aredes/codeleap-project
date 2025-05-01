@@ -9,17 +9,37 @@ interface CommentProps {
   name: string;
   content: string;
   timestamp: string;
+  mentions: string[];
 }
 
-const Comment: React.FC<CommentProps> = ({ name, content, timestamp }) => {
-  //   const { username } = useUser();
+const Comment: React.FC<CommentProps> = ({
+  name,
+  content,
+  timestamp,
+  mentions,
+}) => {
+  const highlightMentions = (text: string, mentions: string[]) => {
+    const mentionRegex = new RegExp(`@(${mentions.join("|")})`, "gi");
+    return text
+      .split(mentionRegex)
+      .map((part, index) =>
+        mentions.includes(part.toLowerCase()) ? (
+          <span key={index}>@{part}</span>
+        ) : (
+          part
+        )
+      );
+  };
+
   return (
     <S.Container>
       <S.Header>
         <strong>@{name}</strong>
       </S.Header>
       <S.Content>
-        {content} <S.Timestamp>{timestamp}</S.Timestamp>
+        <h2>{highlightMentions(content, mentions)}</h2>
+
+        <S.Timestamp>{timestamp}</S.Timestamp>
       </S.Content>
 
       <S.Footer>

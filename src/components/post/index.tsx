@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { PostProps } from "./types";
+import { CommentPost, PostProps } from "./types";
 import EditIcon from "../../assets/edit.svg";
 import TrashIcon from "../../assets/trash.svg";
 
@@ -15,10 +15,11 @@ import { FaHeart } from "react-icons/fa";
 import { IoIosChatboxes } from "react-icons/io";
 
 import CommentForm from "../commentForm";
-import Comment from "../comment";
+
 import { useAuth } from "../../hooks/useAuth";
 import formatTime from "../../utils/formatTime";
 import { AiOutlineCaretDown } from "react-icons/ai";
+import Comment from "../comment";
 
 const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const [editIsVisible, setEditIsVisible] = useState(false);
@@ -30,6 +31,7 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const { setLoading } = useLoading();
   const postService = PostService();
   const [commentIsOpen, setCommentIsOpen] = useState(false);
+  const [postComments, setPostComments] = useState<CommentPost[] | null>(null);
 
   const handleDelete = async () => {
     try {
@@ -61,7 +63,23 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
     } catch (error) {
       setLoading(false);
       console.error("Error liking the post:", error);
-      toast.error("Error liking the post. Please try again.");
+      toast.error("Error liking the post. Please try again later.");
+    }
+  };
+
+  const handleCommentIsOpen = async () => {
+    try {
+      setLoading(true);
+      if (!commentIsOpen) {
+        const response = await postService.loadPostComments(data.id);
+        console.log(response);
+        setPostComments(response);
+      }
+      setLoading(false);
+      setCommentIsOpen(!commentIsOpen);
+    } catch (error) {
+      setLoading(false);
+      console.error("Error:", error);
     }
   };
 
@@ -108,26 +126,25 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
               <span>1 </span>
             </S.ReactionIconsContainer>
           </S.ReactionContainer>
-          <S.CommentOpen
-            isOpen={commentIsOpen}
-            onClick={() => setCommentIsOpen(!commentIsOpen)}
-          >
-            <AiOutlineCaretDown /> ver comentarios <AiOutlineCaretDown />
+          <S.CommentOpen isOpen={commentIsOpen}>
+            <h2 onClick={() => handleCommentIsOpen()}>
+              <AiOutlineCaretDown /> see comments
+              <AiOutlineCaretDown />
+            </h2>
           </S.CommentOpen>
         </S.ReactionSection>
 
         {commentIsOpen && (
           <S.CommentSection style={{ marginBottom: "20px" }}>
-            <Comment
-              name="teste"
-              content="blablablbablabla fdskj çdfjsflkas fçads çfasdç fjadçsf jçads jfçadsjfçljsçfdjsa çff jdflç ajsfa dsfaslkfa djlk "
-              timestamp="1231"
-            />
-            <Comment
-              name="teste2 "
-              content="blablablbablabla "
-              timestamp="12:31"
-            />
+            {postComments?.map((comment) => (
+              <Comment
+                key={comment.id}
+                name={""}
+                content={comment.content}
+                mentions={comment.mentioned_users}
+                timestamp={formatTime(comment.created_at).toLocaleString()}
+              />
+            ))}
           </S.CommentSection>
         )}
       </S.PostFooter>

@@ -20,6 +20,7 @@ export const IconsContainer = styled.div`
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
+      transform: scale(1.2);
     }
   }
 `;
@@ -114,10 +115,15 @@ export const ReactionSection = styled.div`
 export const CommentOpen = styled.div<{ isOpen: boolean }>`
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 5px;
   color: ${({ theme }) => theme.colors.secondary};
+
+  h2 {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
   svg {
     transition: transform 0.3s ease-in-out;
     transform: ${({ isOpen }) => (!isOpen ? "rotate(180deg)" : "rotate(0deg)")};

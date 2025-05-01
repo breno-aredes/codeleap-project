@@ -12,3 +12,12 @@ export interface Post {
   likes_count: number;
   is_liked: boolean;
 }
+
+export interface CommentPost {
+  id: string;
+  post_id: number;
+  user_id: string;
+  content: string;
+  created_at: string;
+  mentioned_users: string[];
+}
