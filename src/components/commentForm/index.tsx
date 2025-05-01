@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { InputContent } from "../../styles/globalStyles";
 import * as S from "./styles";
 import Button from "../button";
+import { useLoading } from "../../hooks/useLoading";
+import { PostService } from "../../services/post";
+import { toast } from "react-toastify";
+import { CommentFormProps } from "./types";
 
-const CommentForm = () => {
+const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
+  const { setLoading } = useLoading();
+  const postService = PostService();
+
   const [text, setText] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [users] = useState(["breno-aredes", "john-doe", "jane-smith"]);
@@ -31,6 +38,29 @@ const CommentForm = () => {
     setShowSuggestions(false);
   };
 
+  const handleCreateComment = async () => {
+    if (!text.trim()) {
+      toast.error("Comment cannot be empty.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await postService.CreateComment(postId, {
+        content: text.trim(),
+      });
+      await loadComents();
+      toast.success("Comment created successfully!");
+      setText("");
+      setLoading(false);
+    } catch (error) {
+      toast.error("Error creating the comment. Please try again.");
+      console.error("Error creating comment:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <InputContent>
       <textarea
@@ -49,7 +79,9 @@ const CommentForm = () => {
         </S.List>
       )}
       <S.ButtonContent>
-        <Button color="blue">Comment</Button>
+        <Button color="blue" onClick={handleCreateComment}>
+          Comment
+        </Button>
       </S.ButtonContent>
     </InputContent>
   );

@@ -1,5 +1,6 @@
 import { FirebaseAuthUser, LoginData, RegisterData } from "../types/auth";
 
+//normalmente ficaria na .env deixei aqui para facilitar rodar o projeto.
 const BASE_URL = "https://posts-manager-api.onrender.com/api/careers";
 
 const AuthService = {

@@ -1,6 +1,7 @@
-import { CreatePost, UpdatePost } from "../types/posts";
+import { CreateCommentType, CreatePost, UpdatePost } from "../types/posts";
 import { useAuthenticatedFetch } from "./authenticatedFetch";
 
+//normalmente ficaria na .env deixei aqui para facilitar rodar o projeto.
 const BASE_URL = "https://posts-manager-api.onrender.com/api/careers/";
 
 export const PostService = () => {
@@ -44,6 +45,13 @@ export const PostService = () => {
     });
   };
 
+  const CreateComment = async (id: number, data: CreateCommentType) => {
+    return authenticatedFetch(`${BASE_URL}${id}/comments/`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  };
+
   return {
     getPosts,
     createPost,
@@ -51,5 +59,6 @@ export const PostService = () => {
     deletePost,
     likePost,
     loadPostComments,
+    CreateComment,
   };
 };

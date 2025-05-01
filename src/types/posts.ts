@@ -9,3 +9,7 @@ export interface UpdatePost {
   title: string;
   content: string;
 }
+
+export interface CreateCommentType {
+  content: string;
+}

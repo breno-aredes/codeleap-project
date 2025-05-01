@@ -79,9 +79,12 @@ export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
   gap: 4px;
 
   span {
+    font-size: 12px;
     color: ${({ theme }) => theme.colors.secondary};
   }
   svg {
+    width: 15px;
+    height: 15px;
     color: ${({ theme, isColored }) =>
       isColored ? theme.colors.primary : theme.colors.secondary};
   }

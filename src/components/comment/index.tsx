@@ -1,16 +1,10 @@
 import React from "react";
 import * as S from "./styles";
-// import { useUser } from "../../hooks/useUser";
 import EditIcon from "../../assets/edit.svg";
 import TrashIcon from "../../assets/trash.svg";
 import { FaHeart } from "react-icons/fa";
-
-interface CommentProps {
-  name: string;
-  content: string;
-  timestamp: string;
-  mentions: string[];
-}
+import { useAuth } from "../../hooks/useAuth";
+import { CommentProps } from "./types";
 
 const Comment: React.FC<CommentProps> = ({
   name,
@@ -18,6 +12,7 @@ const Comment: React.FC<CommentProps> = ({
   timestamp,
   mentions,
 }) => {
+  const { username } = useAuth();
   const highlightMentions = (text: string, mentions: string[]) => {
     const mentionRegex = new RegExp(`@(${mentions.join("|")})`, "gi");
     return text
@@ -43,16 +38,18 @@ const Comment: React.FC<CommentProps> = ({
       </S.Content>
 
       <S.Footer>
-        {/* {username === name && ( */}
         <S.IconsContainer>
-          <img src={TrashIcon} alt="Trash" />
-          <img src={EditIcon} alt="Edit" />
+          {username === name && (
+            <>
+              <img src={TrashIcon} alt="Trash" />
+              <img src={EditIcon} alt="Edit" />
+            </>
+          )}
           <S.ReactionIconsContainer>
             <FaHeart />
             <span>0</span>
           </S.ReactionIconsContainer>
         </S.IconsContainer>
-        {/* )} */}
       </S.Footer>
     </S.Container>
   );

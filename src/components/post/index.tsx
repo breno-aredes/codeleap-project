@@ -67,20 +67,25 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
     }
   };
 
-  const handleCommentIsOpen = async () => {
+  const fetchLoadComments = async () => {
     try {
       setLoading(true);
-      if (!commentIsOpen) {
-        const response = await postService.loadPostComments(data.id);
-        console.log(response);
-        setPostComments(response);
-      }
+      const response = await postService.loadPostComments(data.id);
+      setPostComments(response);
       setLoading(false);
-      setCommentIsOpen(!commentIsOpen);
     } catch (error) {
       setLoading(false);
-      console.error("Error:", error);
+      console.error("Error fetching post comments:", error);
+      toast.error("Error fetching comments. Please try again later.");
     }
+  };
+
+  const handleCommentIsOpen = async () => {
+    if (!commentIsOpen) {
+      await fetchLoadComments();
+    }
+    setLoading(false);
+    setCommentIsOpen(!commentIsOpen);
   };
 
   return (
@@ -151,7 +156,7 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
 
       {isCommentOpen && (
         <S.CommentSection>
-          <CommentForm />
+          <CommentForm postId={data.id} loadComents={fetchLoadComments} />
         </S.CommentSection>
       )}
 
