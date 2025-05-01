@@ -86,6 +86,6 @@ export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
     width: 15px;
     height: 15px;
     color: ${({ theme, isColored }) =>
-      isColored ? theme.colors.primary : theme.colors.secondary};
+      isColored ? theme.colors.red.secondaryRed : theme.colors.secondary};
   }
 `;

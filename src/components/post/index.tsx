@@ -118,7 +118,7 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
       <S.PostFooter>
         <S.ReactionSection>
           <S.ReactionContainer>
-            <S.ReactionIconsContainer isColored={hasLiked}>
+            <S.ReactionIconsContainer isColored={hasLiked} isLoved>
               <FaHeart onClick={handleLike} />
               <span>{likes}</span>
             </S.ReactionIconsContainer>
@@ -128,15 +128,17 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
                   setIsCommentOpen(!isCommentOpen);
                 }}
               />
-              <span>1 </span>
+              <span>{data.comments_count} </span>
             </S.ReactionIconsContainer>
           </S.ReactionContainer>
-          <S.CommentOpen isOpen={commentIsOpen}>
-            <h2 onClick={() => handleCommentIsOpen()}>
-              <AiOutlineCaretDown /> see comments
-              <AiOutlineCaretDown />
-            </h2>
-          </S.CommentOpen>
+          {data.comments_count !== 0 && (
+            <S.CommentOpen isOpen={commentIsOpen}>
+              <h2 onClick={() => handleCommentIsOpen()}>
+                <AiOutlineCaretDown /> see comments
+                <AiOutlineCaretDown />
+              </h2>
+            </S.CommentOpen>
+          )}
         </S.ReactionSection>
 
         {commentIsOpen && (
@@ -146,7 +148,7 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
                 key={comment.id}
                 commentId={comment.id}
                 postId={data.id}
-                name={""}
+                name={comment.user_name}
                 content={comment.content}
                 mentions={comment.mentioned_users}
                 timestamp={formatTime(comment.created_at)}

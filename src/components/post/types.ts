@@ -11,6 +11,7 @@ export interface Post {
   created_datetime: string;
   likes_count: number;
   is_liked: boolean;
+  comments_count: number;
 }
 
 export interface CommentPost {
@@ -22,4 +23,5 @@ export interface CommentPost {
   mentioned_users: string[];
   likes_count: number;
   is_liked: boolean;
+  user_name: string;
 }

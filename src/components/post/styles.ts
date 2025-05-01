@@ -72,7 +72,10 @@ export const PostMain = styled.main`
   }
 `;
 
-export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
+export const ReactionIconsContainer = styled.div<{
+  isColored?: boolean;
+  isLoved?: boolean;
+}>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -86,8 +89,12 @@ export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
 
     cursor: pointer;
     transition: transform 0.3s;
-    color: ${({ theme, isColored }) =>
-      isColored ? theme.colors.primary : theme.colors.secondary};
+    color: ${({ theme, isColored, isLoved }) =>
+      isLoved && isColored
+        ? theme.colors.red.secondaryRed
+        : isColored
+        ? theme.colors.background
+        : theme.colors.secondary};
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
     &:hover {
       transform: scale(1.2);
@@ -98,7 +105,7 @@ export const ReactionIconsContainer = styled.div<{ isColored?: boolean }>`
 export const PostFooter = styled.footer`
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 0px 0px 15px 15px;
 `;
 

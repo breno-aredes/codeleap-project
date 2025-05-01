@@ -10,6 +10,7 @@ const Theme = {
     border: "#999999",
     red: {
       primaryRed: "#FF5151",
+      secondaryRed: "#f76f6f",
     },
     green: {
       primaryGreen: "#4CAF50",
