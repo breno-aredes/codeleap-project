@@ -114,6 +114,5 @@ export const CommentSection = styled.div`
   display: flex;
   flex-direction: column;
   padding: 24px;
-  margin-bottom: 20px;
   gap: 28px;
 `;

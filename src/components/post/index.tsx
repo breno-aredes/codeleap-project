@@ -6,7 +6,7 @@ import TrashIcon from "../../assets/trash.svg";
 import EditPost from "../modal/editPost";
 import { useState } from "react";
 import DeletePost from "../modal/deletePost";
-import { useUser } from "../../hooks/useUser";
+
 import { PostService } from "../../services/post";
 import { toast } from "react-toastify";
 import { useLoading } from "../../hooks/useLoading";
@@ -16,6 +16,7 @@ import { IoIosChatboxes } from "react-icons/io";
 
 import CommentForm from "../commentForm";
 import Comment from "../comment";
+import { useAuth } from "../../hooks/useAuth";
 
 const Post: React.FC<PostProps> = ({
   title,
@@ -29,7 +30,7 @@ const Post: React.FC<PostProps> = ({
   const [deleteIsVisible, setDeleteIsVisible] = useState(false);
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
-  const { username } = useUser();
+  const { username } = useAuth();
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const { setLoading } = useLoading();
 
@@ -100,7 +101,7 @@ const Post: React.FC<PostProps> = ({
           </S.ReactionIconsContainer>
         </S.ReactionContainer>
 
-        <S.CommentSection>
+        <S.CommentSection style={{ marginBottom: "20px" }}>
           <Comment
             name="teste"
             content="blablablbablabla fdskj çdfjsflkas fçads çfasdç fjadçsf jçads jfçadsjfçljsçfdjsa çff jdflç ajsfa dsfaslkfa djlk "

@@ -3,7 +3,7 @@ import Modal from "..";
 import { ModalContent } from "./styles";
 import Button from "../../button";
 import { ButtonContent, InputContent } from "../../../styles/globalStyles";
-import { useUser } from "../../../hooks/useUser";
+import { useUser } from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const LoginModal = () => {

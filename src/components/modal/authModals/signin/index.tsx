@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalContent } from "../styles";
 
 import { toast } from "react-toastify";
-import { useUser } from "../../../../hooks/useUser";
+import { useUser } from "../../../../hooks/useAuth";
 import { ButtonContent, InputContent } from "../../../../styles/globalStyles";
 import Button from "../../../button";
 

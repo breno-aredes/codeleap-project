@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Modal from "..";
 
-import { useUser } from "../../../hooks/useUser";
+import { useUser } from "../../../hooks/useAuth";
 import LoginForm from "./signin";
 import SignUp from "./signup";
 

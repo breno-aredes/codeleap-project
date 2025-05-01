@@ -12,14 +12,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PostSchema } from "../../schemas/posts.schemas";
 import { PostData } from "./types";
-import { useUser } from "../../hooks/useUser";
+
 import { toast } from "react-toastify";
 import AuthModals from "../../components/modal/authModals";
+import { useAuth } from "../../hooks/useAuth";
 
 const MainScreen: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
   const { setLoading } = useLoading();
-  const { username } = useUser();
+  const { username } = useAuth();
 
   const formMethods = useForm({
     resolver: yupResolver(PostSchema),
