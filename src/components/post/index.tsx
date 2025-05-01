@@ -5,7 +5,7 @@ import TrashIcon from "../../assets/trash.svg";
 
 import EditPost from "../modal/editPost";
 import { useState } from "react";
-import DeletePost from "../modal/deletePost";
+import DeletePost from "../modal/deleteItem";
 
 import { PostService } from "../../services/post";
 import { toast } from "react-toastify";
@@ -144,10 +144,13 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
             {postComments?.map((comment) => (
               <Comment
                 key={comment.id}
+                commentId={comment.id}
+                postId={data.id}
                 name={""}
                 content={comment.content}
                 mentions={comment.mentioned_users}
-                timestamp={formatTime(comment.created_at).toLocaleString()}
+                timestamp={formatTime(comment.created_at)}
+                loadComents={fetchLoadComments}
               />
             ))}
           </S.CommentSection>

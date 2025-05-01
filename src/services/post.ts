@@ -52,6 +52,13 @@ export const PostService = () => {
     });
   };
 
+  const deleteComment = async (postId: number, commentId: string) => {
+    return authenticatedFetch(`${BASE_URL}${postId}/comments/`, {
+      method: "DELETE",
+      body: JSON.stringify({ comment_id: commentId }),
+    });
+  };
+
   return {
     getPosts,
     createPost,
@@ -60,5 +67,6 @@ export const PostService = () => {
     likePost,
     loadPostComments,
     CreateComment,
+    deleteComment,
   };
 };

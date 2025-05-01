@@ -5,7 +5,7 @@ import { ModalContent } from "./styles";
 
 import { deletePostProps } from "./types";
 
-const DeletePost: React.FC<deletePostProps> = ({
+const DeleteItem: React.FC<deletePostProps> = ({
   isVisible,
   setIsVisible,
   onConfirm,
@@ -29,4 +29,4 @@ const DeletePost: React.FC<deletePostProps> = ({
   );
 };
 
-export default DeletePost;
+export default DeleteItem;
