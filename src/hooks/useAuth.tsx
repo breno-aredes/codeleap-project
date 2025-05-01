@@ -10,6 +10,7 @@ interface UserContextType {
   userId: string | null;
   username: string;
   token: string | null;
+  isAuth: () => boolean;
   setUserData: (id: string, name: string, token: string) => void;
   clearUserData: () => void;
 }
@@ -58,9 +59,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("token");
   };
 
+  const isAuth = () => {
+    return token !== null;
+  };
+
   return (
     <UserContext.Provider
-      value={{ userId, username, token, setUserData, clearUserData }}
+      value={{ userId, username, token, isAuth, setUserData, clearUserData }}
     >
       {children}
     </UserContext.Provider>

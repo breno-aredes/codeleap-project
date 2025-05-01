@@ -3,11 +3,11 @@ import Modal from "..";
 import { ModalContent } from "./styles";
 import Button from "../../button";
 import { ButtonContent, InputContent } from "../../../styles/globalStyles";
-import { useUser } from "../../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const LoginModal = () => {
-  const { setUsername, username } = useUser();
+  const { setUsername, username } = useAuth();
   const [isVisible, setIsVisible] = useState(true);
   const [direction, setDirection] = useState(-1);
   const [inputUsername, setInputUsername] = useState("");

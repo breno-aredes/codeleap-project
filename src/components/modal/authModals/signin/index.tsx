@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalContent } from "../styles";
 
 import { toast } from "react-toastify";
-import { useUser } from "../../../../hooks/useAuth";
+import { useAuth } from "../../../../hooks/useAuth";
 import { ButtonContent, InputContent } from "../../../../styles/globalStyles";
 import Button from "../../../button";
 
@@ -11,7 +11,7 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onChangeDirection }) => {
-  const { setUsername } = useUser();
+  const { setUsername } = useAuth();
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 
