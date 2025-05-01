@@ -39,8 +39,8 @@ const SignUp: React.FC<SignupFormProps> = ({ onChangeDirection }) => {
         email: data.email,
         password: data.password,
       });
-      const { uid, token, email } = response;
-      setUserData(uid, email, token);
+      const { uid, token, name } = response;
+      setUserData(uid, name, token);
 
       toast.success("Welcome to CodeLeap network!");
       setLoading(false);

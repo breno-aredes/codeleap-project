@@ -21,6 +21,7 @@ const MainScreen: React.FC = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
   const { setLoading } = useLoading();
   const { username } = useAuth();
+  const postService = PostService();
 
   const formMethods = useForm({
     resolver: yupResolver(PostSchema),
@@ -29,7 +30,7 @@ const MainScreen: React.FC = () => {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const data = await PostService.getPosts();
+      const data = await postService.getPosts();
       setPosts(data.results || []);
       setLoading(false);
     } catch (error) {
@@ -41,7 +42,7 @@ const MainScreen: React.FC = () => {
   const handleCreatePost = async (data: { title: string; content: string }) => {
     try {
       setLoading(true);
-      await PostService.createPost({
+      await postService.createPost({
         username: username,
         title: data.title,
         content: data.content,

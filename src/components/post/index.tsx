@@ -33,11 +33,13 @@ const Post: React.FC<PostProps> = ({
   const { username } = useAuth();
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const { setLoading } = useLoading();
+  const postService = PostService();
+  console.log(username);
 
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await PostService.deletePost(id);
+      await postService.deletePost(id);
       toast.success("Post deleted successfully!");
       fetchPosts();
       setDeleteIsVisible(false);

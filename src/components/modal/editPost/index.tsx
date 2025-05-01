@@ -20,6 +20,7 @@ const EditPost: React.FC<EditPostProps> = ({
   content,
 }) => {
   const { setLoading } = useLoading();
+  const postService = PostService();
 
   const formMethods = useForm({
     resolver: yupResolver(PostSchema),
@@ -28,7 +29,7 @@ const EditPost: React.FC<EditPostProps> = ({
   const handleUpdatePost = async (data: { title: string; content: string }) => {
     try {
       setLoading(true);
-      await PostService.updatePost(postId, data);
+      await postService.updatePost(postId, data);
       fetchPosts();
       toast.success("Post updated successfully!");
       setIsVisible(false);

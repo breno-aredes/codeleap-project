@@ -35,9 +35,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onChangeDirection }) => {
 
       const response = await AuthService.login(data);
 
-      const { uid, token, email } = response;
+      const { uid, token, name } = response;
 
-      setUserData(uid, email, token);
+      setUserData(uid, name, token);
       setLoading(false);
       toast.success("Welcome back to CodeLeap network!");
       onChangeDirection(-1);
