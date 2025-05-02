@@ -9,6 +9,10 @@ This project has evolved into two distinct versions:
 - **Branch: Main**: Focused on the initial features and basic implementation for quick project delivery.
 - **Branch: Main-2**: Introduces more functionalities, animations, and integration with an external API.
 
+To take advantage of the extra backend features, my friend [Ian Braga](https://github.com/IanBraga96) developed an API using Django Rest Framework. This API handles the project’s data and consumes a free third-party service for persistence.
+
+You can check out the backend repository here: [Posts Manager API](https://github.com/IanBraga96/posts-manager-api)
+
 > ⚠️ **Attention:** In **Branch: Main-2**, the API used is free and automatically deactivates after 15 minutes of inactivity. Therefore, when attempting to use it, there might be a slight initial delay while the API is reactivated.
 
 ---
