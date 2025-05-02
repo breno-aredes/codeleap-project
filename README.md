@@ -1,71 +1,128 @@
 # Codeleap Project
 
-## Introdução
+## Introduction
 
-O **Codeleap Project** é uma aplicação desenvolvida como desafio de front-end. O objetivo principal é demonstrar habilidades em React, gerenciamento de estado, estilização e boas práticas com TypeScript. Este projeto segue uma abordagem moderna com tecnologias de ponta para criar uma experiência de usuário eficiente e responsiva.
+The **Codeleap Project** is an application originally developed as a front-end challenge. Its primary goal is to demonstrate skills in React, state management, styling, and best practices with TypeScript. The project leverages modern technologies to provide an efficient and responsive user experience.
 
-## Funcionalidades
+This project has evolved into two distinct versions:
 
-- **Postagens**:
+- **Branch: Main**: Focused on the initial features and basic implementation for quick project delivery.
+- **Branch: Main-2**: Introduces more functionalities, animations, and integration with an external API.
 
-  - Visualizar todas as postagens:
-  - Exibe uma lista de postagens criadas por usuários.
-  - Criar uma postagem:
-    - Permite a criação de postagens com título e conteúdo.
-  - Editar uma postagem (modal):
-    - Atualiza o título ou conteúdo de uma postagem existente.
-  - Excluir uma postagem (modal):
-    - Remove uma postagem selecionada após confirmação.
+> ⚠️ **Attention:** In **Branch: Main-2**, the API used is free and automatically deactivates after 15 minutes of inactivity. Therefore, when attempting to use it, there might be a slight initial delay while the API is reactivated.
 
-  ![Página Inicial](src/assets/homepage.png)
+---
 
-## Instalação e Execução
+## Features
 
-1. Clone o repositório:
+### Branch: Main
 
-```sh
+- **Posts:**
+  - **View all posts:** Displays a list of posts created by users.
+  - **Create a post:** Allows users to create posts with a title and content.
+  - **Edit a post (modal):** Updates the title or content of an existing post.
+  - **Delete a post (modal):** Removes a selected post after confirmation.
+- **Homepage**: Displays all posts and provides options to create, edit, and delete posts.
+
+> **Brief image of how it looks:** > ![Homepage](src/assets/homepage.png)
+
+### Branch: Main-2
+
+- **Enhanced Features:**
+  - Integration with an external API provided by [IanBraga96](https://github.com/IanBraga96).
+  - Improved state management and data handling through API and new implementations.
+- **Animations:**
+  - Added interactive animations to enhance the user experience.
+- **Additional Features:**
+
+  - More responsive design for different types of devices.
+
+- **Posts:**
+  - **Post likes:** Displays likes and whether the post was liked by the user.
+  - **Post comments:** Displays a list of comments created by users on posts.
+- **Comments:**
+  - **Create a comment:** Allows users to write simple comments.
+    - **Mentions:** Users can mention others involved in the conversation; when typing `@`, a list is displayed.
+  - **Comment listing:** Displays all comments on the post.
+  - **Edit or delete comments:** Users who made the comment can edit or delete it.
+  - **Comment likes:** Users can like comments made by others.
+- **Authentication:**
+
+  - **Sign-in:** Now includes authentication with email and password.
+  - **Sign-up:** The initial modal switches to a user registration modal.
+
+> **Brief image of how it looks:** > ![Homepage](src/assets/homepage2.png)
+
+---
+
+## Installation and Execution
+
+To run the project locally, follow these steps:
+
+### Clone the repository:
+
+```bash
 git clone git@github.com:breno-aredes/codeleap-project.git
 ```
 
-2. Acesse o diretório do projeto:
+### Navigate to the project directory:
 
-```sh
+```bash
 cd codeleap-project
 ```
 
-3. Instale as dependências:
+### Install the dependencies:
 
-```sh
+```bash
 npm install
 ```
 
-4. Inicie o servidor de desenvolvimento:
+### Start the development server:
 
-```sh
+```bash
 npm run dev
 ```
 
-## Tecnologias Utilizadas
+To switch between branches:
 
-- **React:** Biblioteca para construção da interface do usuário.
-- **React Hook Form:** Biblioteca para gerenciamento de formulários.
-- **Yup:** Biblioteca para validação de formulários.
-- **Styled Components:** Biblioteca para estilização de componentes.
-- **React Icons:** Biblioteca de ícones para React.
-- **React Toastify:** Biblioteca para notificações.
-- **TanStack React Query:** Gerenciamento de estado assíncrono e cache de dados.
-- **TypeScript:** Superset do JavaScript que adiciona tipagem estática.
-- **Vite:** Ferramenta de build rápida e configurável.
-
-## Scripts Disponíveis
-
-- `npm run dev`: Inicia o servidor de desenvolvimento.
-- `npm run build`: Faz o build do projeto para produção.
-- `npm run preview`: Visualiza o build de produção localmente.
-
-## Link do Deploy
-
-O projeto está disponível online e pode ser acessado através do seguinte link:
-[Deploy do Projeto](https://codeleap-project.vercel.app/)
+```bash
+git switch main-2
+```
 
 ---
+
+## Technologies Used
+
+### Common in Both Branches
+
+- **[React](https://reactjs.org/):** Library for building user interfaces.
+- **[React Hook Form](https://react-hook-form.com/):** Library for form management.
+- **[Yup](https://github.com/jquense/yup):** Library for form validation.
+- **[Styled Components](https://styled-components.com/):** Library for styling components.
+- **[React Icons](https://react-icons.github.io/react-icons/):** Icon library for React.
+- **[React Toastify](https://fkhadra.github.io/react-toastify/):** Library for notifications.
+- **[TanStack React Query](https://tanstack.com/query/latest):** Asynchronous state management and data caching.
+- **[TypeScript](https://www.typescriptlang.org/):** JavaScript superset that adds static typing.
+- **[Vite](https://vitejs.dev/):** Fast and configurable build tool.
+
+---
+
+## Available Scripts
+
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the project for production.
+- `npm run preview`: Previews the production build locally.
+
+---
+
+## Deployment Links
+
+### Branch: Main
+
+The original project is available online and can be accessed at the following link:
+[Deploy Main](https://codeleap-project.vercel.app/)
+
+### Branch: Main-2
+
+The enhanced version with additional features and API integration is available at:
+[Deploy Main-2](https://codeleap-project2.vercel.app/)

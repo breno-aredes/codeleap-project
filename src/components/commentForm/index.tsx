@@ -61,7 +61,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
       await loadComents();
       toast.success("Comment created successfully!");
       setValue("content", "");
-      setLoading(false);
     } catch (error) {
       toast.error("Error creating the comment. Please try again.");
       console.error("Error creating comment:", error);
