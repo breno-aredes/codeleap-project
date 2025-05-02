@@ -10,21 +10,19 @@ import { CommentSchema } from "../../schemas/comment.schema";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
+const CommentForm: React.FC<CommentFormProps> = ({
+  postId,
+  loadComents,
+  users,
+}) => {
   const { setLoading } = useLoading();
   const postService = PostService();
 
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [users] = useState(["breno-aredes", "john-doe", "jane-smith"]);
+
   const [filteredUsers, setFilteredUsers] = useState<string[]>([]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { isValid },
-    setValue,
-    watch,
-  } = useForm<commentType>({
+  const { register, handleSubmit, setValue, watch } = useForm<commentType>({
     resolver: yupResolver(CommentSchema),
     mode: "onChange",
   });
@@ -93,7 +91,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ postId, loadComents }) => {
         <Button
           color="blue"
           onClick={handleSubmit(handleCreateComment)}
-          disabled={!isValid}
+          disabled={text.trim() === ""}
         >
           Comment
         </Button>

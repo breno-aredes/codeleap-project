@@ -3,7 +3,7 @@ import * as S from "./styles";
 import EditIcon from "../../assets/edit.svg";
 import TrashIcon from "../../assets/trash.svg";
 import { FaHeart } from "react-icons/fa";
-// import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { CommentProps } from "./types";
 import DeleteComment from "../modal/deleteItem";
 import { useLoading } from "../../hooks/useLoading";
@@ -26,7 +26,7 @@ const Comment: React.FC<CommentProps> = ({
   const [editIsVisible, setEditIsVisible] = useState(false);
   const [likes, setLikes] = useState(likesCount);
   const [hasLiked, setHasLiked] = useState(isLiked);
-  // const { username } = useAuth();
+  const { username } = useAuth();
   const { setLoading } = useLoading();
   const postService = PostService();
 
@@ -89,20 +89,20 @@ const Comment: React.FC<CommentProps> = ({
       </S.Content>
       <S.Footer>
         <S.IconsContainer>
-          {/* {username === name && ( */}
-          <>
-            <img
-              src={TrashIcon}
-              alt="Trash"
-              onClick={() => setDeleteIsVisible(true)}
-            />
-            <img
-              src={EditIcon}
-              alt="Edit"
-              onClick={() => setEditIsVisible(true)}
-            />
-          </>
-          {/*  )} */}
+          {username === name && (
+            <>
+              <img
+                src={TrashIcon}
+                alt="Trash"
+                onClick={() => setDeleteIsVisible(true)}
+              />
+              <img
+                src={EditIcon}
+                alt="Edit"
+                onClick={() => setEditIsVisible(true)}
+              />
+            </>
+          )}
           <S.ReactionIconsContainer isColored={hasLiked}>
             <FaHeart onClick={handleLike} />
             <span>{likes}</span>

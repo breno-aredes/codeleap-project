@@ -32,6 +32,7 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const postService = PostService();
   const [commentIsOpen, setCommentIsOpen] = useState(false);
   const [postComments, setPostComments] = useState<CommentPost[] | null>(null);
+  const [commentNames, setCommentNames] = useState<string[]>([]);
 
   const handleDelete = async () => {
     try {
@@ -70,9 +71,24 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
   const fetchLoadComments = async () => {
     try {
       setLoading(true);
-      const response = await postService.loadPostComments(data.id);
+      const response: CommentPost[] = await postService.loadPostComments(
+        data.id
+      );
       setPostComments(response);
-      setLoading(false);
+      fetchPosts();
+
+      if (response.length === 0) {
+        setCommentIsOpen(false);
+      }
+
+      const commentNames = response.map((comment) => comment.user_name);
+      if (username) {
+        commentNames.push(username);
+      }
+
+      const uniqueCommentNames = Array.from(new Set(commentNames));
+
+      setCommentNames(uniqueCommentNames);
     } catch (error) {
       setLoading(false);
       console.error("Error fetching post comments:", error);
@@ -163,7 +179,11 @@ const Post: React.FC<PostProps> = ({ data, fetchPosts }) => {
 
       {isCommentOpen && (
         <S.CommentSection>
-          <CommentForm postId={data.id} loadComents={fetchLoadComments} />
+          <CommentForm
+            postId={data.id}
+            loadComents={fetchLoadComments}
+            users={commentNames}
+          />
         </S.CommentSection>
       )}
 
